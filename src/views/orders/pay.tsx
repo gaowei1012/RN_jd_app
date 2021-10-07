@@ -42,19 +42,19 @@ const Pay = (props: any) => {
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('quantity')}</Text>
-              <Text style={styles.orderText}>經濟雙人房</Text>
+              <Text style={styles.orderText}>1</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('rebate')}</Text>
-              <Text style={styles.orderText}>經濟雙人房</Text>
+              <Text style={styles.orderText}>{I18n.t('rebate_text')}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('subtotal')}</Text>
-              <Text style={styles.orderText}>經濟雙人房</Text>
+              <Text style={styles.orderText}>￥{orderOrgData.roomTaxes ? orderOrgData.roomTaxes[0].value : ''}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('taxes')}</Text>
-              <Text style={styles.orderText}>￥ {orderOrgData.roomTaxes ? orderOrgData.roomTaxes[0].value : ''}</Text>
+              <Text style={styles.orderText}>￥{orderOrgData.roomTaxes ? orderOrgData.roomTaxes[0].value : ''}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('lving_population')}</Text>
@@ -62,11 +62,11 @@ const Pay = (props: any) => {
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('room_information')}</Text>
-              <Text style={styles.orderText}>經濟雙人房</Text>
+              <Text style={styles.orderText}>{orderOrgData.roomTypeName}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('total')}</Text>
-              <Text style={styles.orderText}>RMB ￥ {orderOrgData.roomTotal}</Text>
+              <Text style={styles.orderText}>RMB￥{orderOrgData.roomTotal}</Text>
             </View>
           </View>
           <TouchableOpacity onPress={() => {

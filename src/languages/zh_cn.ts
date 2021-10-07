@@ -44,10 +44,11 @@ export default {
   pay_price: '價格',
   quantity: '數量',
   rebate: '折扣',
+  rebate_text: '暫無折扣',
   subtotal: '小計',
   taxes: '稅金',
   lving_population: '入住人數',
-  room_information: '經濟雙人房',
+  room_information: '房型信息',
   total: '總計',
   // 住客信息
   guest_information: '住客信息',

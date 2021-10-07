@@ -44,10 +44,11 @@ export default {
   pay_price: 'Price',
   quantity: 'Quantity',
   rebate: 'Rebate',
+  rebate_text: 'No Discount',
   subtotal: 'Subtotal',
   taxes: 'Taxes',
   lving_population: 'Lving Population',
-  room_information: 'Room Information',
+  room_information: 'Room Type Information',
   total: 'Total',
   // 住客信息
   guest_information: 'Guest Information',

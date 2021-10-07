@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, View, Text, Image, TouchableOpacity, Modal, TextInput } from 'react-native'
+import { SafeAreaView, View, Text, Image, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import NavigatorUtils from '../navigation/navigation'
 import { useStore } from '../hooks/useStore'

@@ -43,6 +43,7 @@ export default {
   pay_room_type: 'Room Type Information',
   pay_price: 'Price',
   quantity: 'Quantity',
+  quantity_text: 'Between',
   rebate: 'Rebate',
   rebate_text: 'No Discount',
   subtotal: 'Subtotal',

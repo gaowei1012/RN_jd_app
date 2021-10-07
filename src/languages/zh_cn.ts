@@ -43,6 +43,7 @@ export default {
   pay_room_type: '房型信息',
   pay_price: '價格',
   quantity: '數量',
+  quantity_text: '間',
   rebate: '折扣',
   rebate_text: '暫無折扣',
   subtotal: '小計',

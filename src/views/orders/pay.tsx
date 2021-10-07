@@ -42,7 +42,7 @@ const Pay = (props: any) => {
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('quantity')}</Text>
-              <Text style={styles.orderText}>1</Text>
+              <Text style={styles.orderText}>1{I18n.t('quantity_text')}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('rebate')}</Text>

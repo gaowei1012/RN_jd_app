@@ -41,6 +41,7 @@ export default {
   pay_room_type: '部屋タイプ情報',
   pay_price: '価格',
   quantity: '量',
+  quantity_text: 'の間に',
   rebate: '割り引き',
   subtotal: '小計',
   taxes: '稅金',

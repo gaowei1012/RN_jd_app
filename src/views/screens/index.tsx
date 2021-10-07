@@ -9,6 +9,7 @@ import {
 import I18n from '../../languages/index'
 import { styles } from '../../styles/payment'
 import { px2dp, width } from '../../utils/px2dp'
+import NavigatorUtils from '../../navigation/navigation'
 
 const PaymentScreens = (props: any) => {
   const [card, setCard] = useState(null);
@@ -47,13 +48,17 @@ const PaymentScreens = (props: any) => {
           marginVertical: px2dp(15),
         }}
         onCardChange={(cardDetails: any) => {
+          console.log('==>>', cardDetails)
           setCard(cardDetails);
         }}
         onFocus={(focusedField) => {
           console.log('focusField', focusedField);
         }}
       />
-      <TouchableOpacity activeOpacity={1} style={styles.paymentBtn}>
+      <TouchableOpacity onPress={() => {
+        // 付款成功
+        NavigatorUtils.navigation(props.navigation, 'guestInformation')
+      }} activeOpacity={1} style={styles.paymentBtn}>
         <Text style={styles.paymentBtnText}>{I18n.t('confirm_payment')}</Text>
         <Image style={styles.seleIcon} source={require('../../assets/arrow.png')} />
       </TouchableOpacity>

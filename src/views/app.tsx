@@ -16,9 +16,10 @@ const App = observer((props: any) => {
   useEffect(() => {
     // 初始化modal，第一次打开时
     async function getInit() {
-      const _initData: any = await AsyncStorage.getItem('initData')
-      console.log(_initData)
-      if (_initData==null){
+      const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _data: any = JSON.parse(_initData)
+      console.log('_initData', _data)
+      if (_initData == '{}'){
         setVisible(true)
       }
     }

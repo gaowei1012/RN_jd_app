@@ -14,6 +14,7 @@ import * as ImagePicker from 'react-native-image-picker'
 // import Progress from 'react-native-progress'
 // import * as Adminatble from 'react-native-animatable'
 import { height, px2dp } from '../../utils/px2dp'
+import ProgressBar from '../../components/Progress'
 import I18n from '../../languages'
 import _ from 'lodash'
 
@@ -89,8 +90,10 @@ const GuestInformation = (props: any) => {
           <Text style={styles.zlTextWrapper}>
             <Text style={styles.zlText}>{I18n.t('progress')}</Text>
           </Text>
-          {/* <Progress.Bar color='#ddd' borderColor='#000' borderWidth={1} progress={0.3} width={200} /> */}
-
+          {/* 进度条 */}
+          <View style={styles.progressBar}>
+            <ProgressBar/>
+          </View>
           <Text style={styles.listNameWrapper}>
             <Text style={styles.listName}>{I18n.t('user_name')}</Text>
           </Text>

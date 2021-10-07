@@ -76,6 +76,11 @@ export const styles = StyleSheet.create({
     width: px2dp(100),
     // backgroundColor: 'rgb(243,212,213)',
   },
+  progressBar: {
+    marginVertical: px2dp(6),
+    borderBottomColor: '#ddd',
+    borderBottomWidth: px2dp(.4),
+  },
   listNameWrapper: {
     marginTop: px2dp(6),
     paddingBottom: px2dp(4),

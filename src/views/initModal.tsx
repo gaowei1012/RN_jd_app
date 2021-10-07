@@ -8,7 +8,8 @@ import I18n from '../languages/index'
 const InitModal = (props: any) => {
   // 酒店ID
   // 1399252918863622146
-  const [jdId, setJdId] = useState<string>('')
+  // 暂时默认酒店ID
+  const [jdId, setJdId] = useState<string>('1399252918863622146')
   const { visible, setVisible } = props
   const { pmsAppThemeStore } = useStore()
 

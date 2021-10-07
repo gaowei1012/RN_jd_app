@@ -70,8 +70,8 @@ const Pay = (props: any) => {
             </View>
           </View>
           <TouchableOpacity onPress={() => {
-            // NavigatorUtils.navigation(props.navigation, 'paymentScreens')
-            NavigatorUtils.navigation(props.navigation, 'guestInformation')
+            NavigatorUtils.navigation(props.navigation, 'paymentScreens')
+            // NavigatorUtils.navigation(props.navigation, 'guestInformation')
           }} activeOpacity={1} style={styles.orderSureContainer}>
             <Text style={styles.orderSureText}>{I18n.t('pay_order')}</Text>
             <Image style={styles.seleIcon} source={require('../../assets/arrow.png')} />

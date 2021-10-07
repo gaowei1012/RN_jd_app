@@ -86,4 +86,7 @@ export default {
   // 交互
   comfirm: '確認',
   cancel: 'キャンセル',
+  // 支付 
+  total_order_price: '合計注文価格',
+  confirm_payment: '支払いを確認する',
 }

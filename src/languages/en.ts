@@ -89,4 +89,7 @@ export default {
   // 交互
   comfirm: 'Comfirm',
   cancel: 'Cancel',
+  // 支付
+  total_order_price: 'Total order price',
+  confirm_payment: 'Confirm Payment',
 }

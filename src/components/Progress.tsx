@@ -35,7 +35,7 @@ const ProgressBar = (props: any) => {
   }
 
   return (
-    <Svg height={px2dp(20)} width='300'>
+    <Svg height='15' width='300'>
       <G fill='none' stroke='#3d5875'>
         <Path strokeLinecap="round" strokeWidth="8" d="M5 8 l215 0" />
       </G>

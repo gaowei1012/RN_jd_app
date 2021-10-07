@@ -176,7 +176,7 @@ export const styles = StyleSheet.create({
     marginRight: px2dp(20)
   },
   orderBottomCheckBox: {
-    marginTop: px2dp(2)
+    marginTop: px2dp(2),
   },
   orderBottomCheckText: {
     color: '#333',

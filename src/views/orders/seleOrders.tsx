@@ -8,6 +8,8 @@ import { styles } from '../../styles/order'
 import I18n from '../../languages'
 import _ from 'lodash'
 
+const tintColors: any = '#9E663C'
+
 const SeleOrders = (props: any) => {
   const [orderOrgData, setOrderOrgData] = useState<any>({})
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
@@ -95,6 +97,7 @@ const SeleOrders = (props: any) => {
               <CheckBox
                 style={styles.orderBottomCheckBox}
                 disabled={false}
+                tintColors={tintColors}
                 value={toggleCheckBox}
                 onValueChange={(newValue) => setToggleCheckBox(newValue)}
               />

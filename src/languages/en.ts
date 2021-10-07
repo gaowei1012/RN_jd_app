@@ -29,6 +29,8 @@ export default {
   room_type_information: 'Room Type Information',
   room_number: 'Room Number',
   room_status: 'Room Status',
+  room_status_register: 'User Registration',
+  room_status_review: 'Examination Passed',
   precautions: 'Precautions',
   payment_status: 'Payment Status',
   not_payment_status_text: 'Unpaid',

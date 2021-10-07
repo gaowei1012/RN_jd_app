@@ -23,6 +23,7 @@ const OrderTracking = (props: any) => {
   const handleOrderTracking = async () => {
     const result: any = await pmsUserRegistrationStore.getOrderInfoByResId_pmsUserRegistration(order_str)
     if (result.state) {
+      console.log('订单搜索成功', result.opt)
       await AsyncStorage.setItem('orderData', JSON.stringify(result.opt))
       NavigatorUtils.navigation(props.navigation, 'seleOrders')
     }

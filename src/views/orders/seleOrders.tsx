@@ -67,7 +67,7 @@ const SeleOrders = (props: any) => {
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('living_population')}</Text>
-              <Text style={styles.orderText}>{orderOrgData.roomMaxPerson}</Text>
+              <Text style={styles.orderText}>{orderOrgData.roomMaxPerson}{" "}{I18n.t('lving_population_text')}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('room_type_information')}</Text>
@@ -79,7 +79,7 @@ const SeleOrders = (props: any) => {
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('room_status')}</Text>
-              <Text style={styles.orderText}>{orderOrgData.roomStatus}</Text>
+              <Text style={styles.orderText}>{orderOrgData.roomStatus == '6' ? I18n.t('room_status_register') : I18n.t('')}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('precautions')}</Text>

@@ -30,6 +30,8 @@ export default {
   room_type_information: '房型信息',
   room_number: '房間門號',
   room_status: '房間狀態',
+  room_status_register: '用戶登記',
+  room_status_review: '審核通過',
   precautions: '注意事項',
   payment_status: '付款狀態',
   not_payment_status_text: '未支付',

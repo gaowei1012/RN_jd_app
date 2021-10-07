@@ -8,6 +8,7 @@ import {
 } from '@stripe/stripe-react-native'
 import I18n from '../../languages/index'
 import { styles } from '../../styles/payment'
+import { px2dp, width } from '../../utils/px2dp'
 
 const PaymentScreens = (props: any) => {
   const [card, setCard] = useState(null);
@@ -37,12 +38,13 @@ const PaymentScreens = (props: any) => {
         cardStyle={{
           backgroundColor: '#FFFFFF',
           textColor: '#000000',
-          placeholderColor: '#000000'
+          placeholderColor: '#000000',
+          fontSize: px2dp(12)
         }}
         style={{
-          width: '100%',
-          height: 50,
-          marginVertical: 30,
+          width: width,
+          height: px2dp(30),
+          marginVertical: px2dp(15),
         }}
         onCardChange={(cardDetails: any) => {
           setCard(cardDetails);

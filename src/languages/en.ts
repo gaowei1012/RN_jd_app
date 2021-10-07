@@ -9,9 +9,9 @@ export default {
   scan_code_botton_desc: '! Please adjust the brightness of the screen displaying the QR code to the maximum !',
   scan_code_btn_text: 'Start scanning',
   enter_order_number: 'Enter-Order-Number',
-  name_search: 'Name-Search',
+  name_search: 'Name Search',
   order_tracking: 'Order Tracking',
-  search_order_btn_text: 'Search-Order',
+  search_order_btn_text: 'Search Order',
   search_order_placeholderText: 'Please enter the order number of the reservation platform',
   select_order_title: 'Select Order',
   select_order_top_text: 'Order',
@@ -83,6 +83,6 @@ export default {
   check_in_date_pla: 'Please select the check-in date on the booking',
   check_out_date_pla: 'Please select the check-out date on the order',
   // 交互
-  comfirm: 'comfirm',
-  cancel: 'cancel',
+  comfirm: 'Comfirm',
+  cancel: 'Cancel',
 }

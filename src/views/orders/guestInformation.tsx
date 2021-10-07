@@ -82,6 +82,8 @@ const GuestInformation = (props: any) => {
     })
   }
 
+  const handle_synchronize = () => { }
+
   // 渲染内容
   const _renderContent = (section: any) => {
     return (
@@ -127,9 +129,11 @@ const GuestInformation = (props: any) => {
           <View style={styles.addressWrapper}>
             <View style={styles.addressContainer}>
               <Text style={styles.leftAddress}>{I18n.t('address')}</Text>
-              <Text style={styles.rightAddress}>{I18n.t('intended')}</Text>
+              <TouchableOpacity activeOpacity={1} onPress={handle_synchronize} >
+                <Text style={styles.rightAddress}>{I18n.t('intended')}</Text>
+              </TouchableOpacity>
             </View>
-            <TextInput onChangeText={(text: any) => setAddress(text)} style={styles.addressTextinput} placeholder={I18n.t('address_of_residence')} placeholderTextColor='#333' />
+            <TextInput value={address} onChangeText={(text: any) => setAddress(text)} style={styles.addressTextinput} placeholder={I18n.t('address_of_residence')} placeholderTextColor='#333' />
           </View>
           <View>
             <Text style={styles.adCartWrapper}>

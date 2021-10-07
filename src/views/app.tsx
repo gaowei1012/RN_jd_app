@@ -19,7 +19,7 @@ const App = observer((props: any) => {
       const _initData: any = await AsyncStorage.getItem('initTheme')
       const _data: any = JSON.parse(_initData)
       console.log('_initData', _data)
-      if (_initData == '{}'){
+      if (_initData == '{}' || _initData == null){
         setVisible(true)
       }
     }

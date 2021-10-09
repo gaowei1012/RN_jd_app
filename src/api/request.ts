@@ -18,7 +18,7 @@ export function request(url: string, method: any, data?: object, token?: any) {
           res.status === 200 &&
           res.data.code === 200
         ) {
-          // ToastAndroid.show(res.data.message, 1000)
+          ToastAndroid.show(res.data.message, 2000)
           // RootToast.showToast(res.data.message)
           resolve(res);
         } else {
@@ -26,6 +26,7 @@ export function request(url: string, method: any, data?: object, token?: any) {
         }
       })
       .catch((err: AxiosError) => {
+        ToastAndroid.show(err.message, 2000)
         // RootToast.showToast(err.message)
         reject(err);
       });

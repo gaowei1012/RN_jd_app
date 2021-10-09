@@ -9,7 +9,7 @@ const InitModal = (props: any) => {
   // 酒店ID
   // 1399252918863622146
   // 暂时默认酒店ID
-  const [jdId, setJdId] = useState<string>('1399252918863622146')
+  const [jdId, setJdId] = useState<string>('')
   const { visible, setVisible } = props
   const { pmsAppThemeStore } = useStore()
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SafeAreaView, View, Text, Image, TouchableOpacity, TextInput } from 'react-native'
+import { SafeAreaView, View, Text, Image, TouchableOpacity, TextInput, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ComHeader from '../../components/ComHeader'
 import NavigatorUtils from '../../navigation/navigation'
@@ -20,7 +20,6 @@ const SerchNameOrder = (props: any) => {
   // 根据用户名搜索
   const handleSearchByName = async () => {
     const result: any = await pmsUserRegistrationStore.getOrderInfoByName(start_date, order_name, end_date)
-    console.log('serch order by name ==>>', result)
     if (result.state) {
       await AsyncStorage.setItem('orderData', JSON.stringify(result.opt))
       NavigatorUtils.navigation(props.navigation, 'seleOrders')

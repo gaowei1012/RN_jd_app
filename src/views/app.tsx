@@ -8,6 +8,8 @@ import { styles } from '../styles/app'
 import I18n from  '../languages/index'
 import InitModal from './initModal'
 
+const baseUrl = 'https://pms.descartes.digital/jeecg-boot/sys/common/static/'
+
 const App = observer((props: any) => {
   const { pmsAppThemeStore } = useStore()
   const [locale, setLocale] = useState<string>('')
@@ -25,8 +27,6 @@ const App = observer((props: any) => {
     }
     getInit()
   }, [])
-
- 
 
   // 切换中文
   const switchCN = async () => {

@@ -69,7 +69,7 @@ export class PmsUserRegistrationStore {
     return new Promise((resolve, reject) => {
       PmsUserRegistration.pms_getOrderByResId(orderId)
         .then((result: { data: { result: any } }) => {
-          resolve({ state: true, opt: result.data.result })
+          resolve({ state: true, opt: result.data.result[0] })
         })
         .catch(err => {
           reject({ state: false, opt: '' })

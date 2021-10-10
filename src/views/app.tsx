@@ -9,7 +9,6 @@ import I18n from '../languages/index'
 import { base } from '../config/index'
 import InitModal from './initModal'
 import { height, width } from '../utils/px2dp'
-import { toJS } from 'mobx'
 
 const App = observer((props: any) => {
   const { pmsAppThemeStore, languageStore } = useStore()
@@ -28,7 +27,7 @@ const App = observer((props: any) => {
       }
     }
     getInit()
-  }, [])
+  }, [themeOrgData])
 
   // 切换中文
   const switchCN = async () => {
@@ -54,6 +53,7 @@ const App = observer((props: any) => {
   return (
     <SafeAreaView style={styles.appContainer}>
       <InitModal visible={visible} setVisible={setVisible} />
+      {console.log('themeOrgData', themeOrgData)}
       {themeOrgData !==null ? <ImageBackground style={{ width: width, height: height }} source={{ uri: `${base.BaseImghUrl}` + themeOrgData.backgroundImgUrl }}>
         <View style={styles.topLogo}>
           <Image style={styles.logo} source={{ uri: `${base.BaseImghUrl + themeOrgData.logoImgUrl}` }} />

@@ -18,6 +18,7 @@ const SeleOrders = (props: any) => {
   useEffect(() => {
     async function getOrderData() {
       const result: any = await AsyncStorage.getItem('orderData')
+      console.log('result ==>>', JSON.parse(result))
       setOrderOrgData(JSON.parse(result))
     }
     getOrderData();

@@ -2,26 +2,31 @@ import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import NavigatorUtils from '../navigation/navigation'
 import { styles } from '../styles/header'
+import { useStore } from '../hooks/useStore'
 import I18n from '../languages/index'
 
 const ComHeader = (props: any) => {
   const { setLocale } = props
+  const { languageStore } = useStore()
 
   // 切换中文
   const switchCN = async () => {
     I18n.locale = 'zh'
     setLocale(I18n.locale)
+    languageStore.set_language('zh')
   }
   // 切换日语
   const switchJP = () => {
     I18n.locale = 'ja'
     setLocale(I18n.locale)
+    languageStore.set_language('ja')
   }
 
   // 切换英文
   const switchEN = async () => {
     I18n.locale = 'en'
     setLocale(I18n.locale)
+    languageStore.set_language('en')
   }
 
   return (

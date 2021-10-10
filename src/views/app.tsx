@@ -8,8 +8,8 @@ import { styles } from '../styles/app'
 import I18n from '../languages/index'
 import { base } from '../config/index'
 import InitModal from './initModal'
-import { toJS } from 'mobx'
 import { height, width } from '../utils/px2dp'
+import { toJS } from 'mobx'
 
 const App = observer((props: any) => {
   const { pmsAppThemeStore, languageStore } = useStore()

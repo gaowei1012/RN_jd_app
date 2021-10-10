@@ -1,16 +1,18 @@
 import { makeAutoObservable, observable } from "mobx";
 import * as RNLocalize from "react-native-localize"
 
+let systemLanguage:any;
 const locales = RNLocalize.getLocales();
-const systemLanguage = locales[0]?.languageCode;
-console.log(systemLanguage)
+systemLanguage = locales[0]?.languageCode;
+
 export class LanguageStore {
-  language_status: string = ''
+  language_status: any
 
   constructor() {
     makeAutoObservable(this, {
       language_status: observable,
     })
+    this.language_status = systemLanguage
   }
 
   // 设置中文

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, View, Text, Image, TouchableOpacity } from 'react-native'
+import { SafeAreaView, View, Text, Image, TouchableOpacity, ImageBackground } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import NavigatorUtils from '../navigation/navigation'
 import { useStore } from '../hooks/useStore'
 import { observer } from 'mobx-react-lite'
 import { styles } from '../styles/app'
-import I18n from  '../languages/index'
+import I18n from '../languages/index'
+import { base } from '../config/index'
 import InitModal from './initModal'
-
-const baseUrl = 'https://pms.descartes.digital/jeecg-boot/sys/common/static/'
+import { toJS } from 'mobx'
+import { height, width } from '../utils/px2dp'
 
 const App = observer((props: any) => {
-  const { pmsAppThemeStore } = useStore()
+  const { pmsAppThemeStore, languageStore } = useStore()
   const [locale, setLocale] = useState<string>('')
   const [visible, setVisible] = useState<boolean>(false)
 
@@ -21,7 +22,7 @@ const App = observer((props: any) => {
       const _initData: any = await AsyncStorage.getItem('initTheme')
       const _data: any = JSON.parse(_initData)
       console.log('_initData', _data)
-      if (_initData == '{}' || _initData == null){
+      if (_initData == '{}' || _initData == null) {
         setVisible(true)
       }
     }
@@ -31,76 +32,81 @@ const App = observer((props: any) => {
   // 切换中文
   const switchCN = async () => {
     I18n.locale = 'zh'
+    languageStore.set_language('zh')
     setLocale(I18n.locale)
   }
 
   // 切换日语
   const switchJP = () => {
     I18n.locale = 'ja'
+    languageStore.set_language('ja')
     setLocale(I18n.locale)
   }
 
   // 切换英文
   const switchEN = async () => {
     I18n.locale = 'en'
+    languageStore.set_language('en')
     setLocale(I18n.locale)
   }
 
   return (
     <SafeAreaView style={styles.appContainer}>
       <InitModal visible={visible} setVisible={setVisible} />
-      <View style={styles.topLogo}>
-        <Image style={styles.logo} source={require('../assets/logo.png')} />
-      </View>
-      <View style={styles.topTitle}>
-        <Text style={styles.topTitleSty}>QFOX BLACK DIAMOND HOTEL</Text>
-      </View>
-      <View style={styles.contentContainer}>
-        <View style={styles.contentFlexColums}>
-          <TouchableOpacity onPress={() => {
-            NavigatorUtils.navigation(props.navigation, 'enrollment')
-          }} activeOpacity={1} style={styles.checkInContainer}>
-            <Image style={styles.kfIcon0} source={require('../assets/right-arrow.png')} />
-            <View style={styles.rightWrapper}>
-              <Text style={[styles.checkDefaultFontSty]}>{I18n.t('check_in')}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {
-            NavigatorUtils.navigation(props.navigation, 'expressCheckOut')
-          }} activeOpacity={1} style={styles.checkInContainer}>
-            <Image style={styles.kfIcon0} source={require('../assets/left-arrow.png')} />
-            <View style={styles.rightWrapper}>
-              <Text style={[styles.checkDefaultFontSty]}>{I18n.t('check_out')}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {
-            NavigatorUtils.navigation(props.navigation, 'customer')
-          }} activeOpacity={1} style={styles.checkInContainer}>
-            <Image style={styles.kfIcon} source={require('../assets/kf.png')} />
-            <View style={styles.rightDarkWrapper}>
-              <Text style={[styles.checkDefaultFontSty]}>{I18n.t('service')}</Text>
-            </View>
-          </TouchableOpacity>
+      <ImageBackground style={{ width: width, height: height }} source={{ uri: `${base.BaseImghUrl}` + toJS(pmsAppThemeStore.theme_data.backgroundImgUrl) }}>
+        <View style={styles.topLogo}>
+          <Image style={styles.logo} source={{ uri: `${base.BaseImghUrl + toJS(pmsAppThemeStore.theme_data.logoImgUrl)}` }} />
         </View>
-      </View>
-      <View style={styles.bottomLanguage}>
-        <View style={[styles.defaultLanguage]}>
-          <TouchableOpacity activeOpacity={1} onPress={switchEN}>
-            <Text style={[styles.defaultLanguageFont]}>ENG</Text>
-          </TouchableOpacity>
-          <View style={styles.line} />
-          <TouchableOpacity activeOpacity={1} onPress={switchJP}>
-            <Text style={[styles.defaultLanguageFont]}>日本語</Text>
-          </TouchableOpacity>
-          <View style={styles.line} />
-          <TouchableOpacity activeOpacity={1} onPress={switchCN}>
-            <Text style={[styles.defaultLanguageFont]} >中文</Text>
-          </TouchableOpacity>
+        <View style={styles.topTitle}>
+          <Text style={styles.topTitleSty}>{toJS(pmsAppThemeStore.theme_data.name)}</Text>
         </View>
-        <View style={[styles.defaultFlexRow]}>
-          <Text style={[styles.defaultFontSmail]}>POWERED BY ONE STEP PMS</Text>
+        <View style={styles.contentContainer}>
+          <View style={styles.contentFlexColums}>
+            <TouchableOpacity onPress={() => {
+              NavigatorUtils.navigation(props.navigation, 'enrollment')
+            }} activeOpacity={1} style={styles.checkInContainer}>
+              <Image style={styles.kfIcon0} source={require('../assets/right-arrow.png')} />
+              <View style={styles.rightWrapper}>
+                <Text style={[styles.checkDefaultFontSty]}>{I18n.t('check_in')}</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              NavigatorUtils.navigation(props.navigation, 'expressCheckOut')
+            }} activeOpacity={1} style={styles.checkInContainer}>
+              <Image style={styles.kfIcon0} source={require('../assets/left-arrow.png')} />
+              <View style={styles.rightWrapper}>
+                <Text style={[styles.checkDefaultFontSty]}>{I18n.t('check_out')}</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              NavigatorUtils.navigation(props.navigation, 'customer')
+            }} activeOpacity={1} style={styles.checkInContainer}>
+              <Image style={styles.kfIcon} source={require('../assets/kf.png')} />
+              <View style={styles.rightDarkWrapper}>
+                <Text style={[styles.checkDefaultFontSty]}>{I18n.t('service')}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+        <View style={styles.bottomLanguage}>
+          <View style={[styles.defaultLanguage]}>
+            <TouchableOpacity activeOpacity={1} onPress={switchEN}>
+              <Text style={[styles.defaultLanguageFont]}>ENG</Text>
+            </TouchableOpacity>
+            <View style={styles.line} />
+            <TouchableOpacity activeOpacity={1} onPress={switchJP}>
+              <Text style={[styles.defaultLanguageFont]}>日本語</Text>
+            </TouchableOpacity>
+            <View style={styles.line} />
+            <TouchableOpacity activeOpacity={1} onPress={switchCN}>
+              <Text style={[styles.defaultLanguageFont]} >中文</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={[styles.defaultFlexRow]}>
+            <Text style={[styles.defaultFontSmail]}>POWERED BY ONE STEP PMS</Text>
+          </View>
+        </View>
+      </ImageBackground>
     </SafeAreaView>
   )
 })

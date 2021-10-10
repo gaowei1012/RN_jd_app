@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View, Text, Image, TouchableOpacity, BackHandler } from 'react-native'
 import NavigatorUtils from '../../navigation/navigation'
+import { useStore } from '../../hooks/useStore'
 import { styles } from '../../styles/enrollment'
+import { observer } from 'mobx-react-lite'
 import I18n from '../../languages'
+import { toJS } from 'mobx'
 
-const Enrollment = (props: any) => {
+const Enrollment = observer((props: any) => {
   const [locale, setLocale] = useState<any>('')
+  const { pmsAppThemeStore } = useStore()
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', hardwareBackPress)
@@ -38,6 +42,7 @@ const Enrollment = (props: any) => {
   return (
     <SafeAreaView>
       <View style={styles.topLogo}>
+        {toJS(pmsAppThemeStore.theme_data)}
         <Image style={styles.logo} source={require('../../assets/logo.png')} />
       </View>
       <View style={styles.topTitle}>
@@ -85,6 +90,6 @@ const Enrollment = (props: any) => {
       </View>
     </SafeAreaView>
   )
-}
+})
 
 export default Enrollment

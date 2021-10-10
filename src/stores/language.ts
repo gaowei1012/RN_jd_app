@@ -1,5 +1,9 @@
 import { makeAutoObservable, observable } from "mobx";
+import * as RNLocalize from "react-native-localize"
 
+const locales = RNLocalize.getLocales();
+const systemLanguage = locales[0]?.languageCode;
+console.log(systemLanguage)
 export class LanguageStore {
   language_status: string = ''
 

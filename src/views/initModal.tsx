@@ -9,7 +9,7 @@ const InitModal = (props: any) => {
   // 酒店ID
   // 1399252918863622146
   // 暂时默认酒店ID
-  const [jdId, setJdId] = useState<string>('')
+  const [jdId, setJdId] = useState<string>('1399252918863622146')
   const { visible, setVisible } = props
   const { pmsAppThemeStore } = useStore()
 
@@ -17,11 +17,10 @@ const InitModal = (props: any) => {
   const handleSubmit = async () => {
     // 当未填写时不能进入
     if (jdId !== '') {
-      const result: any = await pmsAppThemeStore.get_theme_data(jdId)
-      console.log(result)
-      if (result.state) {
-        console.log('__result', result)
-        await AsyncStorage.setItem('initTheme', JSON.stringify(result))
+      const potRes: any = await pmsAppThemeStore.get_theme_data(jdId)
+      if (potRes) {
+        console.log('__result', JSON.stringify(potRes.opt))
+        await AsyncStorage.setItem('initTheme', JSON.stringify(potRes.opt))
         setVisible(false)
       }
     }

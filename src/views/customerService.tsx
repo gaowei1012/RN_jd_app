@@ -1,11 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View, Text, Image } from 'react-native'
+import { useStore } from '../hooks/useStore'
 import ComHeader from '../components/ComHeader'
+import { observer } from 'mobx-react-lite'
 import { styles } from '../styles/customer'
 import I18n from '../languages'
+import { toJS, autorun } from 'mobx'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const CustomerService = (props: any) => {
+const CustomerService = observer((props: any) => {
   const [locale, setLocale] = useState<any>('')
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
+
+  const [customerServiceLine, setCustomerServiceLine] = useState<string>('')
+  const [customerServicePhone, setCustomerServicePhone] = useState<string>('')
+  const [customerServiceWechat, setCustomerServiceWechat] = useState<string>('')
+  const [customerServiceWhatsapp, setCustomerServiceWhatsapp] = useState<string>('')
+
+  const { languageStore, pmsAppThemeStore } = useStore()
+
+  useEffect(() => {
+    async function getThemeData() {
+      const opt: any = await AsyncStorage.getItem('initTheme')
+      setThemeOrgData(JSON.parse(opt))
+    }
+    getThemeData()
+  }, [])
+
+  useEffect(() => {
+    autorun(() => {
+      console.log(languageStore.language_status)
+    })
+  }, [])
 
   return (
     <SafeAreaView>
@@ -40,6 +66,6 @@ const CustomerService = (props: any) => {
       </View>
     </SafeAreaView>
   )
-}
+})
 
 export default CustomerService

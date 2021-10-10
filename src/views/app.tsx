@@ -15,13 +15,14 @@ const App = observer((props: any) => {
   const { pmsAppThemeStore, languageStore } = useStore()
   const [locale, setLocale] = useState<string>('')
   const [visible, setVisible] = useState<boolean>(false)
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
 
   useEffect(() => {
     // 初始化modal，第一次打开时
     async function getInit() {
       const _initData: any = await AsyncStorage.getItem('initTheme')
       const _data: any = JSON.parse(_initData)
-      console.log('_initData', _data)
+      setThemeOrgData(_data)
       if (_initData == '{}' || _initData == null) {
         setVisible(true)
       }
@@ -32,33 +33,33 @@ const App = observer((props: any) => {
   // 切换中文
   const switchCN = async () => {
     I18n.locale = 'zh'
-    languageStore.set_language('zh')
     setLocale(I18n.locale)
+    languageStore.set_language('zh')
   }
 
   // 切换日语
   const switchJP = () => {
     I18n.locale = 'ja'
-    languageStore.set_language('ja')
     setLocale(I18n.locale)
+    languageStore.set_language('ja')
   }
 
   // 切换英文
   const switchEN = async () => {
     I18n.locale = 'en'
-    languageStore.set_language('en')
     setLocale(I18n.locale)
+    languageStore.set_language('en')
   }
 
   return (
     <SafeAreaView style={styles.appContainer}>
       <InitModal visible={visible} setVisible={setVisible} />
-      <ImageBackground style={{ width: width, height: height }} source={{ uri: `${base.BaseImghUrl}` + toJS(pmsAppThemeStore.theme_data.backgroundImgUrl) }}>
+      {themeOrgData !==null ? <ImageBackground style={{ width: width, height: height }} source={{ uri: `${base.BaseImghUrl}` + themeOrgData.backgroundImgUrl }}>
         <View style={styles.topLogo}>
-          <Image style={styles.logo} source={{ uri: `${base.BaseImghUrl + toJS(pmsAppThemeStore.theme_data.logoImgUrl)}` }} />
+          <Image style={styles.logo} source={{ uri: `${base.BaseImghUrl + themeOrgData.logoImgUrl}` }} />
         </View>
         <View style={styles.topTitle}>
-          <Text style={styles.topTitleSty}>{toJS(pmsAppThemeStore.theme_data.name)}</Text>
+          <Text style={styles.topTitleSty}>{themeOrgData.name}</Text>
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.contentFlexColums}>
@@ -106,7 +107,8 @@ const App = observer((props: any) => {
             <Text style={[styles.defaultFontSmail]}>POWERED BY ONE STEP PMS</Text>
           </View>
         </View>
-      </ImageBackground>
+      </ImageBackground> : null}
+      
     </SafeAreaView>
   )
 })

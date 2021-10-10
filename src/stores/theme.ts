@@ -11,14 +11,23 @@ export class PmsAppThemeStore {
     })
 
     // 二次打开时候， 持久化数据
-    if (this.theme_data == undefined) {
-      this.getThemeData()
-    }
+    // console.log('this.theme_data', this.theme_data)
+    // if (this.theme_data == undefined) {
+    //   //this.getThemeData()
+    //   AsyncStorage.getItem('initTheme')
+    //     .then((themeData: any) => {
+    //       this.theme_data = JSON.parse(themeData)
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //     })
+    // }
   }
 
   // 持久化数据
   async getThemeData() {
     const themeData: any = await AsyncStorage.getItem('initTheme')
+    console.log('themeData', themeData)
     this.theme_data = JSON.parse(themeData)
   }
 
@@ -34,6 +43,11 @@ export class PmsAppThemeStore {
           reject(err)
         })
     })
+  }
+
+  // 设置
+  set_theme_data(data: any) {
+    this.theme_data = data
   }
 }
 

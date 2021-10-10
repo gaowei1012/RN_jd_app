@@ -5,7 +5,6 @@ import { useStore } from '../../hooks/useStore'
 import { styles } from '../../styles/enrollment'
 import { observer } from 'mobx-react-lite'
 import I18n from '../../languages'
-import { toJS } from 'mobx'
 import { base } from '../../config/index'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 

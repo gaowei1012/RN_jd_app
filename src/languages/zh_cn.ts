@@ -45,7 +45,7 @@ export default {
   quantity: '數量',
   quantity_text: '間',
   rebate: '折扣',
-  rebate_text: '暫無折扣',
+  rebate_text: '無',
   subtotal: '小計',
   taxes: '稅金',
   lving_population: '入住人數',

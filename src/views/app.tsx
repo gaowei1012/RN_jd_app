@@ -11,7 +11,7 @@ import InitModal from './initModal'
 import { height, width } from '../utils/px2dp'
 
 const App = observer((props: any) => {
-  const { pmsAppThemeStore, languageStore } = useStore()
+  const { languageStore } = useStore()
   const [locale, setLocale] = useState<string>('')
   const [visible, setVisible] = useState<boolean>(false)
   const [themeOrgData, setThemeOrgData] = useState<any>(null)
@@ -53,7 +53,7 @@ const App = observer((props: any) => {
   return (
     <SafeAreaView style={styles.appContainer}>
       <InitModal visible={visible} setVisible={setVisible} />
-      {console.log('themeOrgData', themeOrgData)}
+      {/* {console.log('themeOrgData', themeOrgData)} */}
       {themeOrgData !==null ? <ImageBackground style={{ width: width, height: height }} source={{ uri: `${base.BaseImghUrl}` + themeOrgData.backgroundImgUrl }}>
         <View style={styles.topLogo}>
           <Image style={styles.logo} source={{ uri: `${base.BaseImghUrl + themeOrgData.logoImgUrl}` }} />

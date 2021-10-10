@@ -14,6 +14,7 @@ const Pay = (props: any) => {
   useEffect(() => {
     async function getOrderData() {
       const result: any = await AsyncStorage.getItem('orderData')
+      console.log('JSON.parse(result)', JSON.parse(result))
       setOrderOrgData(JSON.parse(result))
     }
     getOrderData();
@@ -38,11 +39,11 @@ const Pay = (props: any) => {
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('pay_price')}</Text>
-              <Text style={styles.orderText}>{orderOrgData.roomPirce}</Text>
+              <Text style={styles.orderText}>￥{orderOrgData.roomRate.newPublishedRackRate}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('quantity')}</Text>
-              <Text style={styles.orderText}>1{I18n.t('quantity_text')}</Text>
+              <Text style={styles.orderText}>{orderOrgData.days}{I18n.t('quantity_text')}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('rebate')}</Text>
@@ -50,7 +51,8 @@ const Pay = (props: any) => {
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('subtotal')}</Text>
-              <Text style={styles.orderText}>￥{orderOrgData.roomTaxes ? orderOrgData.roomTaxes[0].value : ''}</Text>
+              {/* <Text style={styles.orderText}>￥{orderOrgData.roomTaxes ? orderOrgData.roomTaxes[0].value : ''}</Text> */}
+              <Text style={styles.orderText}>￥{orderOrgData.days * orderOrgData.roomRate.newPublishedRackRate}</Text>
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('taxes')}</Text>
@@ -60,10 +62,10 @@ const Pay = (props: any) => {
               <Text style={styles.orderText}>{I18n.t('lving_population')}</Text>
               <Text style={styles.orderText}>{orderOrgData.roomMaxPerson}{" "}{I18n.t('lving_population_text')}</Text>
             </View>
-            <View style={styles.orderItem}>
+            {/* <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('room_information')}</Text>
               <Text style={styles.orderText}>{orderOrgData.roomTypeName}</Text>
-            </View>
+            </View> */}
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('total')}</Text>
               <Text style={styles.orderText}>RMB￥{orderOrgData.roomTotal}</Text>

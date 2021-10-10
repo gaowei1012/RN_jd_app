@@ -6,10 +6,21 @@ import { styles } from '../../styles/enrollment'
 import { observer } from 'mobx-react-lite'
 import I18n from '../../languages'
 import { toJS } from 'mobx'
+import { base } from '../../config/index'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Enrollment = observer((props: any) => {
   const [locale, setLocale] = useState<any>('')
-  const { pmsAppThemeStore } = useStore()
+  const { languageStore } = useStore()
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
+
+  useEffect(() => {
+    async function getThemeData() {
+      const opt: any = await AsyncStorage.getItem('initTheme')
+      setThemeOrgData(JSON.parse(opt))
+    }
+    getThemeData()
+  }, [])
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', hardwareBackPress)
@@ -18,35 +29,36 @@ const Enrollment = observer((props: any) => {
   // 监听原生返回事件
   const hardwareBackPress = (): any => {
     setLocale(I18n.locale)
-    console.log('eee===>>>', )
   }
 
   // 切换中文
   const switchCN = async () => {
     I18n.locale = 'zh'
     setLocale(I18n.locale)
+    languageStore.set_language('zh')
   }
   // 切换日语
   const switchJP = () => {
     I18n.locale = 'ja'
     setLocale(I18n.locale)
+    languageStore.set_language('ja')
   }
 
   // 切换英文
   const switchEN = async () => {
     I18n.locale = 'en'
     setLocale(I18n.locale)
+    languageStore.set_language('en')
   }
 
 
   return (
     <SafeAreaView>
       <View style={styles.topLogo}>
-        {toJS(pmsAppThemeStore.theme_data)}
-        <Image style={styles.logo} source={require('../../assets/logo.png')} />
+        {themeOrgData !== null ? <Image style={styles.logo} source={{uri: `${base.BaseImghUrl + themeOrgData.logoImgUrl}`}} /> : null}
       </View>
       <View style={styles.topTitle}>
-        <Text style={styles.topTitleSty}>QFOX BLACK DIAMOND HOTEL</Text>
+        {themeOrgData !==null ? <Text style={styles.topTitleSty}>{themeOrgData.name}</Text> : null}
       </View>
       <View style={styles.enrollmentContainer}>
         <View style={styles.rzWrapper}>

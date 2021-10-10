@@ -23,7 +23,6 @@ const Pay = observer((props: any) => {
     }
     getOrderData();
   }, [])
-  //
 
   const handleSubmit = async () => {
     const potRes: any = await payStore.getPayKey(orderOrgData.id)

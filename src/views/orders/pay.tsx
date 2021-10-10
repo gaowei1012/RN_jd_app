@@ -3,13 +3,17 @@ import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView } from 'r
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ComHeader from '../../components/ComHeader'
 import NavigatorUtils from '../../navigation/navigation'
+import { useStore } from '../../hooks/useStore'
 import { styles } from '../../styles/order'
 import I18n from '../../languages'
 import _ from 'lodash'
+import { observer } from 'mobx-react-lite'
 
-const Pay = (props: any) => {
+const Pay = observer((props: any) => {
   const [orderOrgData, setOrderOrgData] = useState<any>({})
   const [locale, setLocale] = useState<any>('')
+
+  const { payStore } = useStore()
 
   useEffect(() => {
     async function getOrderData() {
@@ -19,6 +23,16 @@ const Pay = (props: any) => {
     }
     getOrderData();
   }, [])
+  //
+
+  const handleSubmit = async () => {
+    const potRes: any = await payStore.getPayKey(orderOrgData.id)
+    if (potRes.state) {
+      await AsyncStorage.setItem('pay_pk', potRes.opt)
+      NavigatorUtils.navigation(props.navigation, 'paymentScreens')
+    }
+  }
+
   return (
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
@@ -39,7 +53,7 @@ const Pay = (props: any) => {
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('pay_price')}</Text>
-              <Text style={styles.orderText}>￥{orderOrgData.roomRate.newPublishedRackRate}</Text>
+              {orderOrgData.roomRate ? <Text style={styles.orderText}>￥{orderOrgData.roomRate.newPublishedRackRate}</Text> : null}
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('quantity')}</Text>
@@ -52,7 +66,7 @@ const Pay = (props: any) => {
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('subtotal')}</Text>
               {/* <Text style={styles.orderText}>￥{orderOrgData.roomTaxes ? orderOrgData.roomTaxes[0].value : ''}</Text> */}
-              <Text style={styles.orderText}>￥{orderOrgData.days * orderOrgData.roomRate.newPublishedRackRate}</Text>
+              {orderOrgData.roomRate ? <Text style={styles.orderText}>￥{orderOrgData.days * orderOrgData.roomRate.newPublishedRackRate}</Text> : null}
             </View>
             <View style={styles.orderItem}>
               <Text style={styles.orderText}>{I18n.t('taxes')}</Text>
@@ -71,10 +85,7 @@ const Pay = (props: any) => {
               <Text style={styles.orderText}>RMB￥{orderOrgData.roomTotal}</Text>
             </View>
           </View>
-          <TouchableOpacity onPress={() => {
-            NavigatorUtils.navigation(props.navigation, 'paymentScreens')
-            // NavigatorUtils.navigation(props.navigation, 'guestInformation')
-          }} activeOpacity={1} style={styles.orderSureContainer}>
+          <TouchableOpacity onPress={handleSubmit} activeOpacity={1} style={styles.orderSureContainer}>
             <Text style={styles.orderSureText}>{I18n.t('pay_order')}</Text>
             <Image style={styles.seleIcon} source={require('../../assets/arrow.png')} />
           </TouchableOpacity>
@@ -86,6 +97,6 @@ const Pay = (props: any) => {
       </ScrollView>
     </SafeAreaView>
   )
-}
+})
 
 export default Pay

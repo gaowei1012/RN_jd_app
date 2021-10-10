@@ -8,6 +8,8 @@ const config = {
   getAppTheme: '/jeecg-boot/pad/pmsPadSetting/queryById', // 获取酒店类型
   scanCode: '/jeecg-boot/sys/common/getCode?hotelId=1399252918863622146', // 生成二维码
   getOrderInfoByName: '/jeecg-boot/pmsUserRegistration/pmsUserRegistration/getOrderInfoByName', // 根据用户名，日期查询
+  getPayKey: '/jeecg-boot/payment/getPublishableKey', // 获取stripe发布密钥
+  createPay: '/jeecg-boot/payment/createPaymentIntent', // 创建支付意向
 }
 
 export default config

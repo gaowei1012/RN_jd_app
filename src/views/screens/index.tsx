@@ -33,12 +33,6 @@ const PaymentScreen = (props: any) => {
 
   const billingDetails: PaymentMethodCreateParams.BillingDetails = {
     email: orderOrgData.email,
-    // phone: '+48888000888',
-    // addressCity: 'Houston',
-    // addressCountry: 'US',
-    // addressLine1: '1459  Circle Drive',
-    // addressLine2: 'Texas',
-    // addressPostalCode: '77063',
   }
 
   const handlePayPress = async () => {
@@ -75,7 +69,6 @@ const PaymentScreen = (props: any) => {
           marginVertical: px2dp(15),
         }}
         onCardChange={(cardDetails: any) => {
-          console.log('==>>', cardDetails)
           setCard(cardDetails);
         }}
         onFocus={(focusedField) => {

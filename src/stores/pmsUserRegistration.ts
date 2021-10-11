@@ -69,6 +69,7 @@ export class PmsUserRegistrationStore {
     return new Promise((resolve, reject) => {
       PmsUserRegistration.pms_getOrderByResId(orderId)
         .then((result: { data: { result: any } }) => {
+          console.log('list ==>', result.data.result)
           resolve({ state: true, opt: result.data.result[0] })
         })
         .catch(err => {
@@ -97,7 +98,7 @@ export class PmsUserRegistrationStore {
     return new Promise((resolve, reject) => {
       PmsUserRegistration.pms_getOrderInfoByName(fromDate, name, toDate)
         .then((result: { data: { result: any } }) => {
-          console.log('==?>>', result)
+          console.log('==>>', result)
           resolve({ state: true, opt: result.data.result })
         })
         .catch(err => {

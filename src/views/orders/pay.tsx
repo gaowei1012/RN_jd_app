@@ -26,8 +26,11 @@ const Pay = observer((props: any) => {
 
   const handleSubmit = async () => {
     const potRes: any = await payStore.getPayKey(orderOrgData.id)
+    const payMent: any = await payStore.createPayMent({orderId: orderOrgData.id})
+    console.log('payMent',payMent)
     if (potRes.state) {
       await AsyncStorage.setItem('pay_pk', potRes.opt)
+      await AsyncStorage.setItem('clientSecret', payMent.opt)
       NavigatorUtils.navigation(props.navigation, 'paymentScreens')
     }
   }

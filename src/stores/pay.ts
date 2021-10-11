@@ -30,7 +30,7 @@ export class PayStore {
     return new Promise((resolve, reject) => {
       PmsPay.create_pay_ment(data)
         .then((result: any) => {
-          resolve({state: true, opt: result})
+          resolve({state: true, opt: result.data.result})
         })
         .catch((err: any) => {
           reject(false)

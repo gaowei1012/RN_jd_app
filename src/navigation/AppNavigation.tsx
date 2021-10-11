@@ -15,7 +15,7 @@ import ExpressCheckOut from '../views/orders/expressCheckOut'
 import RoomPassword from '../views/orders/roomPassword'
 import Pay from '../views/orders/pay'
 import ScanQRCode from '../components/ScanCode'
-import PaymentScreens from '../views/screens'
+import PaymentScreens from '../views/screens/index'
 
 const Stack = createNativeStackNavigator()
 

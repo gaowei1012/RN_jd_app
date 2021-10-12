@@ -43,7 +43,7 @@ const PaymentScreen = (props: any) => {
     })
     if (error) {
       console.log('支付失败 ErrorCode', error.code, error.message)
-      ToastAndroid.show(error.message, 1000)
+      ToastAndroid.show(`支付失败 ${error.message}`, 1000)
     } else if (paymentIntent) {
       console.log('支付成功', paymentIntent.currency, paymentIntent)
       ToastAndroid.show(`订单支付成功 ${paymentIntent.status}`, 1000)

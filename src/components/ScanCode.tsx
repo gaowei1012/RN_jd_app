@@ -1,5 +1,5 @@
 import { RNCamera } from 'react-native-camera';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   StyleSheet,
   Animated,
@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { px2dp, width } from '../utils/px2dp';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ActivityIndicatorOpt from './ActivityIndicator';
 import NavigatorUtils from '../navigation/navigation';
 import { useStore } from '../hooks/useStore'
 import I18n from '../languages'
@@ -19,7 +18,6 @@ import I18n from '../languages'
 let camera;
 
 const ScanQRCode = (props: any) => {
-  const [visible, setVisible] = useState<boolean>(false)
   const moveAnim = useRef(new Animated.Value(-6)).current;
   const { pmsUserRegistrationStore } = useStore()
   useEffect(() => {
@@ -72,21 +70,17 @@ const ScanQRCode = (props: any) => {
     const { data } = result; 
     //只要拿到data就可以了
     // 扫码成功， 获取当前扫码房间信息
-    setVisible(true)
     const _params = data.split('/')[4].split('?')[1].split('=')[1]
     const response: any = await pmsUserRegistrationStore.getOrderInfoByResId_pmsUserRegistration(_params)
     if (response.state) {
-      setVisible(false)
       await AsyncStorage.setItem('orderData', JSON.stringify(response.opt))
       NavigatorUtils.navigation(props.navigation, 'seleOrders')
     } else {
-      setVisible(false)
     }
   };
 
   return (
     <View style={styles.container}>
-      <ActivityIndicatorOpt visible={visible}/>
       <RNCamera
         ref={(ref) => {
           camera = ref;

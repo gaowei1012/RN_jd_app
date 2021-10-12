@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { View, Animated } from 'react-native'
 import { Svg, G, Path } from 'react-native-svg'
-import { px2dp, width } from '../utils/px2dp'
+import { Animated } from 'react-native'
+
 
 let AnimatedPath = Animated.createAnimatedComponent(Path)
 

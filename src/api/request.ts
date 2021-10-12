@@ -1,9 +1,11 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { ToastAndroid } from 'react-native';
-import RootToast from '../utils/toast';
+import rootStore from "../stores";
+
 export function request(url: string, method: any, data?: object, token?: any) {
   return new Promise((resolve, reject) => {
     let body = method === "GET" ? "params" : "data";
+    rootStore.loadingStore.set_loading()
     axios({
       url,
       method: method,
@@ -21,6 +23,7 @@ export function request(url: string, method: any, data?: object, token?: any) {
           ToastAndroid.show(res.data.message, 2000)
           // RootToast.showToast(res.data.message)
           resolve(res);
+          rootStore.loadingStore.remove_loading()
         } else {
           throw res.data;
         }
@@ -28,6 +31,7 @@ export function request(url: string, method: any, data?: object, token?: any) {
       .catch((err: AxiosError) => {
         ToastAndroid.show(err.message, 2000)
         // RootToast.showToast(err.message)
+        rootStore.loadingStore.remove_loading()
         reject(err);
       });
   });

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import ActivityIndicatorOpt from '../../components/ActivityIndicator'
 import ComHeader from '../../components/ComHeader'
 import NavigatorUtils from '../../navigation/navigation'
 import { useStore } from '../../hooks/useStore'
@@ -12,7 +11,6 @@ import { observer } from 'mobx-react-lite'
 
 const Pay = observer((props: any) => {
   const [orderOrgData, setOrderOrgData] = useState<any>({})
-  const [visible, setVisible] = useState<boolean>(false)
   const [locale, setLocale] = useState<any>('')
 
   const { payStore } = useStore()
@@ -27,24 +25,20 @@ const Pay = observer((props: any) => {
   }, [])
 
   const handleSubmit = async () => {
-    setVisible(true)
     const potRes: any = await payStore.getPayKey(orderOrgData.id)
     const payMent: any = await payStore.createPayMent({orderId: orderOrgData.id})
     console.log('payMent',payMent)
     if (potRes.state) {
-      setVisible(false)
       await AsyncStorage.setItem('pay_pk', potRes.opt)
       await AsyncStorage.setItem('clientSecret', payMent.opt)
       NavigatorUtils.navigation(props.navigation, 'paymentScreens')
     } else {
-      setVisible(false)
     }
   }
 
   return (
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
-      <ActivityIndicatorOpt visible={visible} />
       <View style={styles.orderContainer}>
         <View style={styles.orderTitle}>
           <View style={styles.orderLeftNum}>

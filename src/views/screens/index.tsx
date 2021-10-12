@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Text, TouchableOpacity, Image, ToastAndroid } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import ActivityIndicatorOpt from '../../components/ActivityIndicator'
 import {
   CardField,
   CardFieldInput,
@@ -18,7 +17,6 @@ const PaymentScreen = (props: any) => {
   const [card, setCard] = useState(null);
   const [orderOrgData, setOrderOrgData] = useState<any>({})
   const [clientSecret, setClientSecret] = useState('')
-  const [visible, setVisible] = useState<boolean>(false)
 
   const { confirmPayment } = useConfirmPayment()
 
@@ -37,7 +35,6 @@ const PaymentScreen = (props: any) => {
   }
 
   const handlePayPress = async () => {
-    setVisible(true)
     const { error, paymentIntent } = await confirmPayment(clientSecret, {
       type: 'Card',
       billingDetails,
@@ -46,9 +43,7 @@ const PaymentScreen = (props: any) => {
     if (error) {
       console.log('支付失败 ErrorCode', error.code, error.message)
       ToastAndroid.show(`支付失败 ${error.message}`, 1000)
-      setVisible(false)
     } else if (paymentIntent) {
-      setVisible(false)
       console.log('支付成功', paymentIntent.currency, paymentIntent)
       ToastAndroid.show(`订单支付成功 ${paymentIntent.status}`, 1000)
       NavigatorUtils.navigation(props.navigation, 'guestInformation')
@@ -57,7 +52,6 @@ const PaymentScreen = (props: any) => {
 
   return (
     <PayMentScreens>
-      <ActivityIndicatorOpt visible={visible} />
       <CardField
         postalCodeEnabled={false}
         autofocus
@@ -80,7 +74,7 @@ const PaymentScreen = (props: any) => {
           console.log('focusField', focusedField);
         }}
       />
-      <TouchableOpacity disabled={visible ? true : false} onPress={handlePayPress} activeOpacity={1} style={styles.paymentBtn}>
+      <TouchableOpacity onPress={handlePayPress} activeOpacity={1} style={styles.paymentBtn}>
         <Text style={styles.paymentBtnText}>{I18n.t('confirm_payment')}</Text>
         <Image style={styles.seleIcon} source={require('../../assets/arrow.png')} />
       </TouchableOpacity>

@@ -5,7 +5,7 @@ import ComHeader from '../components/ComHeader'
 import { observer } from 'mobx-react-lite'
 import { styles } from '../styles/customer'
 import I18n from '../languages'
-import { toJS, autorun } from 'mobx'
+import { autorun } from 'mobx'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const CustomerService = observer((props: any) => {

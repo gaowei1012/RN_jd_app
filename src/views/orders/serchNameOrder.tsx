@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { SafeAreaView, View, Text, Image, TouchableOpacity, TextInput } from 'react-native'
-import ActivityIndicatorOpt from '../../components/ActivityIndicator'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ComHeader from '../../components/ComHeader'
 import NavigatorUtils from '../../navigation/navigation'
@@ -21,22 +20,16 @@ const SerchNameOrder = (props: any) => {
 
   // 根据用户名搜索
   const handleSearchByName = async () => {
-    setVisible(true)
     const result: any = await pmsUserRegistrationStore.getOrderInfoByName(start_date, order_name, end_date)
-    console.log('resulrt 、===>>>', result)
     if (result.state) {
-      setVisible(false)
       await AsyncStorage.setItem('orderData', JSON.stringify(result.opt))
       NavigatorUtils.navigation(props.navigation, 'seleOrders')
-    } else {
-      setVisible(false)
     }
   }
 
   return (
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
-      <ActivityIndicatorOpt visible={visible} />
       <View style={styles.orderContainer}>
         <View style={styles.orderTitle}>
           <View style={styles.orderLeftNum}>

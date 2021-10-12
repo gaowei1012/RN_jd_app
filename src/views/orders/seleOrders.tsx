@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import ActivityIndicatorOpt from '../../components/ActivityIndicator'
 import CheckBox from '@react-native-community/checkbox'
 import ComHeader from '../../components/ComHeader'
 import NavigatorUtils from '../../navigation/navigation'
@@ -14,9 +13,8 @@ const tintColors: any = '#9E663C'
 const SeleOrders = (props: any) => {
   const [orderOrgData, setOrderOrgData] = useState<any>({})
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
-  const [visible, setVisible] = useState<boolean>(false)
   const [locale, setLocale] = useState<any>('')
-  
+
   useEffect(() => {
     async function getOrderData() {
       const result: any = await AsyncStorage.getItem('orderData')
@@ -28,7 +26,6 @@ const SeleOrders = (props: any) => {
   return (
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
-      <ActivityIndicatorOpt visible={visible}/>
       <View style={styles.orderContainer}>
         <View style={styles.orderTitle}>
           <View style={styles.orderLeftNum}>
@@ -107,11 +104,7 @@ const SeleOrders = (props: any) => {
               <Text style={styles.orderBottomCheckText}>{I18n.t('terms_text')}</Text>
             </View>
             <TouchableOpacity disabled={!toggleCheckBox} onPress={() => {
-              setVisible(true)
-              setTimeout(() => {
-                setVisible(false)
-                NavigatorUtils.navigation(props.navigation, 'pay')
-              }, 1000)
+              NavigatorUtils.navigation(props.navigation, 'pay')
             }} activeOpacity={1} style={styles.orderSureContainer}>
               <Text style={styles.orderSureText}>{I18n.t('payment_text')}</Text>
               <Image style={styles.seleIcon} source={require('../../assets/arrow.png')} />

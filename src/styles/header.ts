@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
   iconWrapper: {
     width: px2dp(30),
     height: px2dp(30),
-    backgroundColor: '#333',
+    // backgroundColor: '#333',
     borderRadius: px2dp(30/2),
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,5 +1,6 @@
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import NavigatorUtils from '../navigation/navigation'
 import { styles } from '../styles/header'
 import { useStore } from '../hooks/useStore'
@@ -8,6 +9,16 @@ import I18n from '../languages/index'
 const ComHeader = (props: any) => {
   const { setLocale } = props
   const { languageStore } = useStore()
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
+
+  useEffect(() => {
+    async function getThemeData() {
+      const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _data: any = JSON.parse(_initData)
+      setThemeOrgData(_data)
+    }
+    getThemeData()
+  }, [])
 
   // 切换中文
   const switchCN = async () => {
@@ -47,12 +58,12 @@ const ComHeader = (props: any) => {
       <View style={styles.comHeaderRightContainer}>
         <TouchableOpacity onPress={() => {
           NavigatorUtils.navigation(props.navigation, 'home')
-        }} activeOpacity={1} style={styles.iconWrapper}>
+        }} activeOpacity={1} style={[styles.iconWrapper, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorSub}` : '' }]}>
           <Image style={styles.icon} source={require('../assets/home.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
           NavigatorUtils.navigation(props.navigation, 'customer')
-        }} activeOpacity={1} style={styles.iconWrapper}>
+        }} activeOpacity={1} style={[styles.iconWrapper, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorSub}` : '' }]}>
           <Image style={styles.icon} source={require('../assets/resource.png')} />
         </TouchableOpacity>
       </View>

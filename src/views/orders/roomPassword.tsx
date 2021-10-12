@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, View, Text, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { SafeAreaView, View, Text, Image, TouchableOpacity } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import NavigatorUtils from '../../navigation/navigation'
 import ComHeader from '../../components/ComHeader'
 import { styles } from '../../styles/roomPassword'
@@ -8,11 +9,22 @@ import I18n from '../../languages'
 
 const RoomPassword = (props: any) => {
   const [locale, setLocale] = useState<any>('')
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
+
+  useEffect(() => {
+    async function getThemeData() {
+      const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _data: any = JSON.parse(_initData)
+      setThemeOrgData(_data)
+    }
+    getThemeData()
+  }, [])
+
   return (
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
       <View>
-        <View style={styles.orderTitle}>
+        <View style={[styles.orderTitle, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorMain}` : '' }]}>
           <View style={styles.orderLeftNum}>
             <Text style={styles.orderLeftNumText}>5</Text>
           </View>

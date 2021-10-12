@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   scanCodeBottom: {
     alignSelf: 'center',
     height: px2dp(26),
-    backgroundColor: '#333',
+    // backgroundColor: '#333',
     borderRadius: px2dp(6),
     paddingHorizontal: px2dp(3),
     justifyContent: 'center',

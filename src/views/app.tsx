@@ -23,13 +23,14 @@ const App = observer((props: any) => {
     async function getInit() {
       const _initData: any = await AsyncStorage.getItem('initTheme')
       const _data: any = JSON.parse(_initData)
+      console.log('_data ==>>', _data)
       setThemeOrgData(_data)
       if (_initData == '{}' || _initData == null) {
         setVisible(true)
       }
     }
     getInit()
-  }, [themeOrgData])
+  }, [])
 
   // 切换中文
   const switchCN = async () => {
@@ -55,9 +56,9 @@ const App = observer((props: any) => {
   return (
     <SafeAreaView style={styles.appContainer}>
       <ActivityIndicatorOpt visible={loadingStore.loading} />
-      <InitModal visible={visible} setVisible={setVisible}/>
+      <InitModal visible={visible} setVisible={setVisible} />
       {/* {console.log('themeOrgData', themeOrgData)} */}
-      {themeOrgData !==null ? <ImageBackground style={{ width: width, height: height }} source={{ uri: `${base.BaseImghUrl}` + themeOrgData.backgroundImgUrl }}>
+      {themeOrgData !== null ? <ImageBackground style={{ width: width, height: height }} source={{ uri: `${base.BaseImghUrl}` + themeOrgData.backgroundImgUrl }}>
         <View style={styles.topLogo}>
           <Image style={styles.logo} source={{ uri: `${base.BaseImghUrl + themeOrgData.logoImgUrl}` }} />
         </View>
@@ -70,7 +71,7 @@ const App = observer((props: any) => {
               NavigatorUtils.navigation(props.navigation, 'enrollment')
             }} activeOpacity={1} style={styles.checkInContainer}>
               <Image style={styles.kfIcon0} source={require('../assets/right-arrow.png')} />
-              <View style={styles.rightWrapper}>
+              <View style={[styles.rightWrapper, { backgroundColor: `${themeOrgData.themeColorMain}` }]}>
                 <Text style={[styles.checkDefaultFontSty]}>{I18n.t('check_in')}</Text>
               </View>
             </TouchableOpacity>
@@ -78,7 +79,7 @@ const App = observer((props: any) => {
               NavigatorUtils.navigation(props.navigation, 'expressCheckOut')
             }} activeOpacity={1} style={styles.checkInContainer}>
               <Image style={styles.kfIcon0} source={require('../assets/left-arrow.png')} />
-              <View style={styles.rightWrapper}>
+              <View style={[styles.rightWrapper, { backgroundColor: `${themeOrgData.themeColorMain}` }]}>
                 <Text style={[styles.checkDefaultFontSty]}>{I18n.t('check_out')}</Text>
               </View>
             </TouchableOpacity>
@@ -86,7 +87,7 @@ const App = observer((props: any) => {
               NavigatorUtils.navigation(props.navigation, 'customer')
             }} activeOpacity={1} style={styles.checkInContainer}>
               <Image style={styles.kfIcon} source={require('../assets/kf.png')} />
-              <View style={styles.rightDarkWrapper}>
+              <View style={[styles.rightDarkWrapper, { backgroundColor: `${themeOrgData.themeColorSub}` }]}>
                 <Text style={[styles.checkDefaultFontSty]}>{I18n.t('service')}</Text>
               </View>
             </TouchableOpacity>

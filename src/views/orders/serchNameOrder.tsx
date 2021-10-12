@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView, View, Text, Image, TouchableOpacity, TextInput } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ComHeader from '../../components/ComHeader'
@@ -16,7 +16,17 @@ const SerchNameOrder = (props: any) => {
   const [end_date, setEndDate] = useState('')
   const [locale, setLocale] = useState<any>('')
   const [visible, setVisible] = useState<boolean>(false)
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
   const { pmsUserRegistrationStore } = useStore()
+
+  useEffect(() => {
+    async function getThemeData() {
+      const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _data: any = JSON.parse(_initData)
+      setThemeOrgData(_data)
+    }
+    getThemeData()
+  }, [])
 
   // 根据用户名搜索
   const handleSearchByName = async () => {
@@ -31,7 +41,7 @@ const SerchNameOrder = (props: any) => {
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
       <View style={styles.orderContainer}>
-        <View style={styles.orderTitle}>
+        <View style={[styles.orderTitle, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorMain}` : '' }]}>
           <View style={styles.orderLeftNum}>
             <Text style={styles.orderLeftNumText}>1</Text>
           </View>

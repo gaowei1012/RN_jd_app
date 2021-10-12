@@ -13,6 +13,7 @@ const tintColors: any = '#9E663C'
 const SeleOrders = (props: any) => {
   const [orderOrgData, setOrderOrgData] = useState<any>({})
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
   const [locale, setLocale] = useState<any>('')
 
   useEffect(() => {
@@ -23,11 +24,20 @@ const SeleOrders = (props: any) => {
     getOrderData();
   }, [])
 
+  useEffect(() => {
+    async function getThemeData() {
+      const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _data: any = JSON.parse(_initData)
+      setThemeOrgData(_data)
+    }
+    getThemeData()
+  }, [])
+
   return (
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
       <View style={styles.orderContainer}>
-        <View style={styles.orderTitle}>
+        <View style={[styles.orderTitle, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorMain}` : '' }]}>
           <View style={styles.orderLeftNum}>
             <Text style={styles.orderLeftNumText}>2</Text>
           </View>

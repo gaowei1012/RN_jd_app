@@ -11,6 +11,7 @@ import { observer } from 'mobx-react-lite'
 
 const Pay = observer((props: any) => {
   const [orderOrgData, setOrderOrgData] = useState<any>({})
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
   const [locale, setLocale] = useState<any>('')
 
   const { payStore } = useStore()
@@ -22,6 +23,15 @@ const Pay = observer((props: any) => {
       setOrderOrgData(JSON.parse(result))
     }
     getOrderData();
+  }, [])
+
+  useEffect(() => {
+    async function getThemeData() {
+      const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _data: any = JSON.parse(_initData)
+      setThemeOrgData(_data)
+    }
+    getThemeData()
   }, [])
 
   const handleSubmit = async () => {
@@ -40,7 +50,7 @@ const Pay = observer((props: any) => {
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
       <View style={styles.orderContainer}>
-        <View style={styles.orderTitle}>
+        <View style={[styles.orderTitle, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorMain}` : '' }]}>
           <View style={styles.orderLeftNum}>
             <Text style={styles.orderLeftNumText}>3</Text>
           </View>

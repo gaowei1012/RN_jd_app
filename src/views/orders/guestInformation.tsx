@@ -39,8 +39,18 @@ const GuestInformation = (props: any) => {
   const [idCard, setIDCard] = useState<string>('')
   const [idPhoto, setIDPhoto] = useState<string>('')
   const [locale, setLocale] = useState<any>('')
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
 
   const { pmsUserRegistrationStore } = useStore()
+
+  useEffect(() => {
+    async function getThemeData() {
+      const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _data: any = JSON.parse(_initData)
+      setThemeOrgData(_data)
+    }
+    getThemeData()
+  }, [])
 
   useEffect(() => {
     async function getOrderData() {
@@ -94,7 +104,7 @@ const GuestInformation = (props: any) => {
           </Text>
           {/* 进度条 */}
           <View style={styles.progressBar}>
-            <ProgressBar/>
+            <ProgressBar />
           </View>
           <Text style={styles.listNameWrapper}>
             <Text style={styles.listName}>{I18n.t('user_name')}</Text>
@@ -194,7 +204,7 @@ const GuestInformation = (props: any) => {
     <SafeAreaView style={{ height: height, backgroundColor: '#fff', paddingBottom: px2dp(10) }}>
       <ComHeader {...props} setLocale={setLocale} />
       <View>
-        <View style={styles.orderTitle}>
+        <View style={[styles.orderTitle, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorMain}` : '' }]}>
           <View style={styles.orderLeftNum}>
             <Text style={styles.orderLeftNumText}>4</Text>
           </View>

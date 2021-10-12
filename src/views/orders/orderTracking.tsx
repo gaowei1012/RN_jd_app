@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView, View, Text, TouchableOpacity, TextInput, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ComHeader from '../../components/ComHeader'
@@ -11,6 +11,16 @@ const OrderTracking = (props: any) => {
   const [order_str, setOrderStr] = useState<string>('')
   const { pmsUserRegistrationStore } = useStore()
   const [locale, setLocale] = useState<any>('')
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
+
+  useEffect(() => {
+    async function getThemeData() {
+      const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _data: any = JSON.parse(_initData)
+      setThemeOrgData(_data)
+    }
+    getThemeData()
+  }, [])
 
   // 获取输入的值
   const handleChangeText = (val: any) => {
@@ -32,7 +42,7 @@ const OrderTracking = (props: any) => {
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
       <View style={styles.orderContainer}>
-        <View style={styles.orderTitle}>
+        <View style={[styles.orderTitle, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorMain}` : '' }]}>
           <View style={styles.orderLeftNum}>
             <Text style={styles.orderLeftNumText}>1</Text>
           </View>

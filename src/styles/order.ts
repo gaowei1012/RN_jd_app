@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   },
   orderTitle: {
     width: width,
-    backgroundColor: '#D85533',
+    // backgroundColor: '#D85533',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: px2dp(8),

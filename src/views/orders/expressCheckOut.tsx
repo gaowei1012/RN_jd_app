@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, View, Text, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { SafeAreaView, View, Text, Image, TouchableOpacity, TextInput } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import NavigatorUtils from '../../navigation/navigation'
 import { useStore } from '../../hooks/useStore'
 import ComHeader from '../../components/ComHeader'
 import { styles } from '../../styles/express'
-import RootToast from '../../utils/toast'
 import I18n from '../../languages'
 
 
@@ -12,8 +12,18 @@ const ExpressCheckOut = (props: any) => {
   const [room_num, setRoomNum] = useState<any>(null)
   const [room_pwd, setRoomPwd] = useState<any>(null)
   const [locale, setLocale] = useState<any>('')
+  const [themeOrgData, setThemeOrgData] = useState<any>(null)
 
   const { pmsUserRegistrationStore } = useStore()
+
+  useEffect(() => {
+    async function getThemeData() {
+      const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _data: any = JSON.parse(_initData)
+      setThemeOrgData(_data)
+    }
+    getThemeData()
+  }, [])
 
   // 退房
   const rooMcheckOut = async () => {
@@ -35,7 +45,7 @@ const ExpressCheckOut = (props: any) => {
   return (
     <SafeAreaView>
       <ComHeader {...props} setLocale={setLocale} />
-      <View style={styles.orderTitle}>
+      <View style={[styles.orderTitle, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorMain}` : '' }]}>
         <View style={styles.orderLeftNum}>
           <Text style={styles.orderLeftNumText}>6</Text>
         </View>

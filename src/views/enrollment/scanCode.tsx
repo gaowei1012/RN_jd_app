@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { SafeAreaView, View, Text, TextInput, Image, TouchableOpacity } from 'react-native'
+import { SafeAreaView, View, Text, Image, TouchableOpacity } from 'react-native'
+import ActivityIndicatorOpt from '../../components/ActivityIndicator'
 import ComHeader from '../../components/ComHeader'
 import NavigatorUtils from '../../navigation/navigation'
 import { styles } from '../../styles/scancode'

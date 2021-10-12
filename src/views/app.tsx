@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View, Text, Image, TouchableOpacity, ImageBackground } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import ActivityIndicatorOpt from '../components/ActivityIndicator'
 import NavigatorUtils from '../navigation/navigation'
 import { useStore } from '../hooks/useStore'
 import { observer } from 'mobx-react-lite'
@@ -14,6 +15,7 @@ const App = observer((props: any) => {
   const { languageStore } = useStore()
   const [locale, setLocale] = useState<string>('')
   const [visible, setVisible] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
   const [themeOrgData, setThemeOrgData] = useState<any>(null)
 
   useEffect(() => {
@@ -52,7 +54,8 @@ const App = observer((props: any) => {
 
   return (
     <SafeAreaView style={styles.appContainer}>
-      <InitModal visible={visible} setVisible={setVisible} />
+      <ActivityIndicatorOpt visible={loading} />
+      <InitModal visible={visible} setVisible={setVisible} setLoading={setLoading} />
       {/* {console.log('themeOrgData', themeOrgData)} */}
       {themeOrgData !==null ? <ImageBackground style={{ width: width, height: height }} source={{ uri: `${base.BaseImghUrl}` + themeOrgData.backgroundImgUrl }}>
         <View style={styles.topLogo}>
@@ -108,7 +111,6 @@ const App = observer((props: any) => {
           </View>
         </View>
       </ImageBackground> : null}
-      
     </SafeAreaView>
   )
 })

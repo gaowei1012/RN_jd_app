@@ -30,7 +30,15 @@ export default class PmsUserRegistration {
   }
   // 根据姓名，入住日期查询
   static pms_getOrderInfoByName(fromDate: string, name: string, toDate: string) {
-    console.log('formDate', fromDate, 'name', name, 'toDate', toDate)
-    return request(baseUrl + getOrderInfoByName + `?fromDate=${fromDate}&name=${name}&toDate=${toDate}`, 'GET')
+    // console.log('formDate', fromDate, 'name', name, 'toDate', toDate)
+    // &hotelId=""
+    // + `?fromDate=${fromDate}&name=${name}&toDate=${toDate}`
+    // console.log('url', baseUrl + getOrderInfoByName + `?fromDate="${fromDate}"&name="${name}"&toDate="${toDate}"`)
+    // const data = {
+    //   formDate: fromDate,
+    //   name: name,
+    //   toDate: toDate
+    // }
+    return request(baseUrl + getOrderInfoByName + `?fromDate="${fromDate}"&name="${name}"&toDate="${toDate}"`, 'GET')
   }
 }

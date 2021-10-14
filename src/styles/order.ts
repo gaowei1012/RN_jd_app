@@ -59,6 +59,7 @@ export const styles = StyleSheet.create({
     height: px2dp(30),
     alignItems: 'center',
     borderWidth: 0,
+    color: '#000'
   },
   searchOrderText: {
     fontSize: px2dp(13)

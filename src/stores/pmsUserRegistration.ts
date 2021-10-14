@@ -98,6 +98,7 @@ export class PmsUserRegistrationStore {
     return new Promise((resolve, reject) => {
       PmsUserRegistration.pms_getOrderInfoByName(fromDate, name, toDate)
         .then((result: { data: { result: any } }) => {
+          console.log('result ===>>>', result)
           resolve({ state: true, opt: result.data.result })
         })
         .catch(err => {

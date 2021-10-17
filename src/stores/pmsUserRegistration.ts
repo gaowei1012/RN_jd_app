@@ -70,6 +70,7 @@ export class PmsUserRegistrationStore {
       PmsUserRegistration.pms_getOrderByResId(orderId)
         .then((result: { data: { result: any } }) => {
           console.log('list ==>', result.data.result)
+          // 返回的是一个List
           resolve({ state: true, opt: result.data.result[0] })
         })
         .catch(err => {

@@ -12,10 +12,7 @@ import country from '../../utils/country'
 import profession from '../../utils/profession'
 import * as ImagePicker from 'react-native-image-picker'
 import * as Progress from 'react-native-progress'
-// import Progress from 'react-native-progress'
-// import * as Adminatble from 'react-native-animatable'
 import { height, px2dp } from '../../utils/px2dp'
-import ProgressBar from '../../components/Progress'
 import I18n from '../../languages'
 import _ from 'lodash'
 
@@ -64,6 +61,7 @@ const GuestInformation = (props: any) => {
       _arr.push(_data.customerName)
       setOrderOrgData(JSON.parse(result))
       setSections(_arr)
+      console.log('orderData', _data)
     }
     getOrderData();
   }, [])

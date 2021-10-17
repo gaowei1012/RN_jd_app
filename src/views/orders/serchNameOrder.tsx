@@ -6,8 +6,9 @@ import NavigatorUtils from '../../navigation/navigation'
 import DatePicker from 'react-native-datepicker'
 import { useStore } from '../../hooks/useStore'
 import { styles } from '../../styles/order'
-import I18n from '../../languages'
+import { ToastAndroid } from 'react-native'
 import { px2dp } from '../../utils/px2dp'
+import I18n from '../../languages'
 
 const SerchNameOrder = (props: any) => {
   // yik lam wong
@@ -15,14 +16,16 @@ const SerchNameOrder = (props: any) => {
   const [start_date, setStartDate] = useState('')
   const [end_date, setEndDate] = useState('')
   const [locale, setLocale] = useState<any>('')
-  const [visible, setVisible] = useState<boolean>(false)
   const [themeOrgData, setThemeOrgData] = useState<any>(null)
+  const [hotelId, setHotelId] = useState<string>('')
   const { pmsUserRegistrationStore } = useStore()
 
   useEffect(() => {
     async function getThemeData() {
       const _initData: any = await AsyncStorage.getItem('initTheme')
+      const _hotelId: any = await AsyncStorage.getItem('hotelId')
       const _data: any = JSON.parse(_initData)
+      setHotelId(_hotelId)
       setThemeOrgData(_data)
     }
     getThemeData()
@@ -30,10 +33,14 @@ const SerchNameOrder = (props: any) => {
 
   // 根据用户名搜索
   const handleSearchByName = async () => {
-    const result: any = await pmsUserRegistrationStore.getOrderInfoByName(start_date, order_name, end_date)
+    const result: any = await pmsUserRegistrationStore.getOrderInfoByName(start_date, order_name, end_date, hotelId)
     if (result.state) {
-      await AsyncStorage.setItem('orderData', JSON.stringify(result.opt))
-      NavigatorUtils.navigation(props.navigation, 'seleOrders')
+      if (result.opt.length > 0) {
+        await AsyncStorage.setItem('orderData', JSON.stringify(result.opt))
+        NavigatorUtils.navigation(props.navigation, 'seleOrders')
+      } else {
+        ToastAndroid.show('暂无入住人信息！请检查输入。', 1000)
+      }
     }
   }
 

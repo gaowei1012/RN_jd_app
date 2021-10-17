@@ -19,8 +19,8 @@ const InitModal = (props: any) => {
     if (jdId !== '') {
       const potRes: any = await pmsAppThemeStore.get_theme_data(jdId)
       if (potRes) {
-        console.log('__result', JSON.stringify(potRes.opt))
         await AsyncStorage.setItem('initTheme', JSON.stringify(potRes.opt))
+        await AsyncStorage.setItem('hotelId', jdId)
         setVisible(false)
       }
     }

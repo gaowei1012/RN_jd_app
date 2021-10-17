@@ -6,6 +6,7 @@ const { baseUrl, addUser, checkOut, checkRegUserStatus, checkRoomPwdStatus, getO
 export default class PmsUserRegistration {
   // 用户入住登记
   static pms_add(data: any) {
+    console.log('data ====>>>', data)
     return request(baseUrl + addUser, 'POST', data)
   }
   // 用户退房
@@ -29,16 +30,7 @@ export default class PmsUserRegistration {
     return request(baseUrl + getOrderInfoByResId + `?reservationId=${reservationId}`, 'GET')
   }
   // 根据姓名，入住日期查询
-  static pms_getOrderInfoByName(fromDate: string, name: string, toDate: string) {
-    // console.log('formDate', fromDate, 'name', name, 'toDate', toDate)
-    // &hotelId=""
-    // + `?fromDate=${fromDate}&name=${name}&toDate=${toDate}`
-    // console.log('url', baseUrl + getOrderInfoByName + `?fromDate="${fromDate}"&name="${name}"&toDate="${toDate}"`)
-    // const data = {
-    //   formDate: fromDate,
-    //   name: name,
-    //   toDate: toDate
-    // }
-    return request(baseUrl + getOrderInfoByName + `?fromDate="${fromDate}"&name="${name}"&toDate="${toDate}"`, 'GET')
+  static pms_getOrderInfoByName(fromDate: string, name: string, toDate: string, hotelId: string) {
+    return request(baseUrl + getOrderInfoByName + `?fromDate=${fromDate}&name=${name}&toDate=${toDate}&hotelId=${hotelId}`, 'GET')
   }
 }

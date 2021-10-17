@@ -215,8 +215,7 @@ const GuestInformation = (props: any) => {
     }
     console.log('data ==>>', data)
     // console.log(orderOrgData)
-    return
-    const result: any = await pmsUserRegistrationStore.add_pmsUserRegistration(data)
+    const result: any = await pmsUserRegistrationStore.add_pmsUserRegistration([data])
     console.log('result ==>>', result)
 
     if (result.state) {

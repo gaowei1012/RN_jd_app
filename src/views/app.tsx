@@ -30,7 +30,7 @@ const App = observer((props: any) => {
       }
     }
     getInit()
-  }, [])
+  }, [visible])
 
   // 切换中文
   const switchCN = async () => {

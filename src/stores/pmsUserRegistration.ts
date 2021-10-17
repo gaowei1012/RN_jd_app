@@ -15,7 +15,7 @@ export class PmsUserRegistrationStore {
       PmsUserRegistration.pms_add(data)
         .then(result => {
           resolve({ state: true, opt: result })
-          console.log(result);
+          console.log('add ==>>', result);
         })
         .catch(err => {
           console.log('err', err)
@@ -94,9 +94,9 @@ export class PmsUserRegistrationStore {
   }
 
   // 通过预订人姓名查询当前你订单
-  getOrderInfoByName(fromDate: string, name: string, toDate: string) {
+  getOrderInfoByName(fromDate: string, name: string, toDate: string, hotelId: string) {
     return new Promise((resolve, reject) => {
-      PmsUserRegistration.pms_getOrderInfoByName(fromDate, name, toDate)
+      PmsUserRegistration.pms_getOrderInfoByName(fromDate, name, toDate, hotelId)
         .then((result: { data: { result: any } }) => {
           console.log('result ===>>>', result)
           resolve({ state: true, opt: result.data.result })

@@ -41,7 +41,8 @@ const Pay = observer((props: any) => {
     if (potRes.state) {
       await AsyncStorage.setItem('pay_pk', potRes.opt)
       await AsyncStorage.setItem('clientSecret', payMent.opt)
-      NavigatorUtils.navigation(props.navigation, 'paymentScreens')
+      // paymentScreens
+      NavigatorUtils.navigation(props.navigation, 'guestInformation')
     } else {
     }
   }

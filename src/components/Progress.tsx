@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Svg, G, Path } from 'react-native-svg'
 import { Animated } from 'react-native'
+import { width } from '../utils/px2dp'
 
 
 let AnimatedPath = Animated.createAnimatedComponent(Path)
@@ -24,6 +25,13 @@ const ProgressBar = (props: any) => {
     setLineAnimation(_lineAnimation)
   }, [])
 
+  const getSVGRootProps = () => ({
+    width: "100%",
+    height: "15",
+    viewBox: `0 0 ${width} 15`,
+    preserveAspectRatio: "xMinYMin meet",
+  });
+
   const start_animation = () => {
     setLineFillAnimation(lineFillAnimation.setValue(0))
     const _options: any = {
@@ -35,7 +43,7 @@ const ProgressBar = (props: any) => {
   }
 
   return (
-    <Svg height='15' width='300'>
+    <Svg {...getSVGRootProps()}>
       <G fill='none' stroke='#3d5875'>
         <Path strokeLinecap="round" strokeWidth="8" d="M5 8 l215 0" />
       </G>

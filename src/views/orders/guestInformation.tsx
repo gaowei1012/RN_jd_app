@@ -11,6 +11,7 @@ import { useStore } from '../../hooks/useStore'
 import country from '../../utils/country'
 import profession from '../../utils/profession'
 import * as ImagePicker from 'react-native-image-picker'
+import * as Progress from 'react-native-progress'
 // import Progress from 'react-native-progress'
 // import * as Adminatble from 'react-native-animatable'
 import { height, px2dp } from '../../utils/px2dp'
@@ -40,6 +41,7 @@ const GuestInformation = (props: any) => {
   const [idPhoto, setIDPhoto] = useState<string>('')
   const [locale, setLocale] = useState<any>('')
   const [themeOrgData, setThemeOrgData] = useState<any>(null)
+  const [progress, setProgress] = useState<number>(0.01)
 
   const { pmsUserRegistrationStore } = useStore()
 
@@ -57,7 +59,7 @@ const GuestInformation = (props: any) => {
       const result: any = await AsyncStorage.getItem('orderData')
       const _data = JSON.parse(result)
       const _arr: any = []
-      _arr.push({ title: _data.customerName })
+      _arr.push(_data.customerName)
       setOrderOrgData(JSON.parse(result))
       setSections(_arr)
     }
@@ -68,7 +70,7 @@ const GuestInformation = (props: any) => {
   const _renderHeader = (section: any) => {
     return (
       <View style={styles.listContainer}>
-        <Text style={styles.listLeftTitle}>{section.title}</Text>
+        <Text style={styles.listLeftTitle}>{section}</Text>
         <Text style={styles.listRightTitle}>{I18n.t('put_away')}</Text>
       </View>
     );
@@ -104,12 +106,16 @@ const GuestInformation = (props: any) => {
           </Text>
           {/* 进度条 */}
           <View style={styles.progressBar}>
-            <ProgressBar />
+            {/* <ProgressBar /> */}
+            <Progress.Bar color={'#d85533'} borderColor={'#3d5875'} unfilledColor={'#3d5875'} animationType="decay" progress={progress} width={720} />
           </View>
           <Text style={styles.listNameWrapper}>
             <Text style={styles.listName}>{I18n.t('user_name')}</Text>
           </Text>
-          <TextInput onChangeText={(text: any) => setUserName(text)} style={styles.listTextinoutName} placeholder={I18n.t('user_name_pla')} placeholderTextColor='#333' />
+          <TextInput onChangeText={(text: any) => {
+            setProgress(0.3)
+            setUserName(text)
+          }} style={styles.listTextinoutName} placeholder={I18n.t('user_name_pla')} placeholderTextColor='#333' />
 
           <View style={{ width: '100%', flexDirection: 'column' }}>
             <Text style={styles.citizenshipWrapper}>
@@ -120,7 +126,7 @@ const GuestInformation = (props: any) => {
                 setSelectedLanguage(itemValue)
               } style={styles.pickerContianer}>
               {country.map((item: any) => (
-                <Picker.Item label={item.cn} value={item.cn} />
+                <Picker.Item style={{ fontSize: 28 }} key={item} label={item.cn} value={item.cn} />
               ))}
             </Picker>
           </View>
@@ -132,7 +138,9 @@ const GuestInformation = (props: any) => {
               onValueChange={(itemValue, itemIndex) => setProfession(itemValue)
               } style={styles.pickerContianer}>
               {profession.map((item: any) => (
-                <Picker.Item label={item.lable} value={item.value} />
+                <Picker.Item style={{
+                  fontSize: 28
+                }} key={item} label={item.lable} value={item.value} />
               ))}
             </Picker>
           </View>
@@ -195,6 +203,7 @@ const GuestInformation = (props: any) => {
     // console.log(orderOrgData)
     const result: any = await pmsUserRegistrationStore.add_pmsUserRegistration(data)
     console.log('result ==>>', result)
+
     if (result.state) {
       NavigatorUtils.navigation(props.navigation, 'roomPassword')
     }
@@ -213,13 +222,27 @@ const GuestInformation = (props: any) => {
       </View>
       <ScrollView>
         <View style={styles.guestinformationContianer}>
-          <Accordion
+          {console.log('sections==sections', '1442346865395003394', sections)}
+          {/* <Accordion
             sections={sections}
             activeSections={activeSections}
+            // touchableComponent={TouchableOpacity}
             renderHeader={_renderHeader}
             renderContent={_renderContent}
             onChange={_updateSections}
             underlayColor={'#fff'}
+            renderAsFlatList={false}
+          /> */}
+          <Accordion
+            activeSections={activeSections}
+            sections={sections}
+            touchableComponent={TouchableOpacity}
+            // expandMultiple={multipleSelect}
+            renderHeader={_renderHeader}
+            renderContent={_renderContent}
+            duration={100}
+            onChange={_updateSections}
+            renderAsFlatList={false}
           />
         </View>
         <TouchableOpacity onPress={handleSubmit} activeOpacity={1} style={styles.expressBottomContainer}>

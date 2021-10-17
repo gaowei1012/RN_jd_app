@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: px2dp(8),
     borderBottomWidth: px2dp(.4),
-    borderBottomColor: '#ddd'
+    borderBottomColor: '#ddd',
   },
   listLeftTitle: {
     fontSize: px2dp(14),
@@ -80,6 +80,8 @@ export const styles = StyleSheet.create({
     marginVertical: px2dp(6),
     borderBottomColor: '#ddd',
     borderBottomWidth: px2dp(.4),
+    paddingBottom: px2dp(6)
+    // backgroundColor: 'red'
   },
   listNameWrapper: {
     marginTop: px2dp(6),

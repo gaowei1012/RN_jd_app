@@ -41,7 +41,9 @@ const GuestInformation = (props: any) => {
   const [idPhoto, setIDPhoto] = useState<string>('')
   const [locale, setLocale] = useState<any>('')
   const [themeOrgData, setThemeOrgData] = useState<any>(null)
-  const [progress, setProgress] = useState<number>(0.01)
+  const [progress, setProgress] = useState<number>(0.0)
+
+  console.log('progress ==>>', progress)
 
   const { pmsUserRegistrationStore } = useStore()
 
@@ -81,6 +83,7 @@ const GuestInformation = (props: any) => {
     ImagePicker.launchImageLibrary(options, function (value: any) {
       if (!value.didCancel || value !== undefined) {
         setIDCard(value.assets[0].base64)
+        setProgress(0.9)
       }
     })
   }
@@ -90,11 +93,14 @@ const GuestInformation = (props: any) => {
     ImagePicker.launchImageLibrary(options, function (value: any) {
       if (!value.didCancel || value !== undefined) {
         setIDPhoto(value.assets[0].base64)
+        setProgress(1.0)
       }
     })
   }
 
-  const handle_synchronize = () => { }
+  const handle_synchronize = () => {
+    // setProgress(0.3)
+  }
 
   // 渲染内容
   const _renderContent = (section: any) => {
@@ -107,14 +113,14 @@ const GuestInformation = (props: any) => {
           {/* 进度条 */}
           <View style={styles.progressBar}>
             {/* <ProgressBar /> */}
-            <Progress.Bar color={'#d85533'} borderColor={'#3d5875'} unfilledColor={'#3d5875'} animationType="decay" progress={progress} width={720} />
+            <Progress.Bar color={'#d85533'} borderColor={'#3d5875'} unfilledColor={'#3d5875'} animationType="spring" progress={progress} width={720} />
           </View>
           <Text style={styles.listNameWrapper}>
             <Text style={styles.listName}>{I18n.t('user_name')}</Text>
           </Text>
           <TextInput onChangeText={(text: any) => {
-            setProgress(0.3)
             setUserName(text)
+            setProgress(0.167)
           }} style={styles.listTextinoutName} placeholder={I18n.t('user_name_pla')} placeholderTextColor='#333' />
 
           <View style={{ width: '100%', flexDirection: 'column' }}>
@@ -122,8 +128,10 @@ const GuestInformation = (props: any) => {
               <Text style={styles.citizenship}>{I18n.t('citizenship')}</Text>
             </Text>
             <Picker selectedValue={selectedLanguage}
-              onValueChange={(itemValue, itemIndex) =>
+              onValueChange={(itemValue, itemIndex) => {
                 setSelectedLanguage(itemValue)
+                setProgress(0.32)
+              }
               } style={styles.pickerContianer}>
               {country.map((item: any) => (
                 <Picker.Item style={{ fontSize: 28 }} key={item} label={item.cn} value={item.cn} />
@@ -135,7 +143,10 @@ const GuestInformation = (props: any) => {
               <Text style={styles.profession}></Text>
             </View>
             <Picker selectedValue={professionVal}
-              onValueChange={(itemValue, itemIndex) => setProfession(itemValue)
+              onValueChange={(itemValue, itemIndex) => {
+                setProfession(itemValue)
+                setProgress(0.48)
+              }
               } style={styles.pickerContianer}>
               {profession.map((item: any) => (
                 <Picker.Item style={{
@@ -151,7 +162,10 @@ const GuestInformation = (props: any) => {
                 <Text style={styles.rightAddress}>{I18n.t('intended')}</Text>
               </TouchableOpacity>
             </View>
-            <TextInput value={address} onChangeText={(text: any) => setAddress(text)} style={styles.addressTextinput} placeholder={I18n.t('address_of_residence')} placeholderTextColor='#333' />
+            <TextInput value={address} onChangeText={(text: any) => {
+              setAddress(text)
+              setProgress(0.64)
+            }} style={styles.addressTextinput} placeholder={I18n.t('address_of_residence')} placeholderTextColor='#333' />
           </View>
           <View>
             <Text style={styles.adCartWrapper}>
@@ -199,8 +213,9 @@ const GuestInformation = (props: any) => {
       userCardPhoto2: idPhoto,
       userOccupation: professionVal,
     }
-    // console.log('data ==>>', data)
+    console.log('data ==>>', data)
     // console.log(orderOrgData)
+    return
     const result: any = await pmsUserRegistrationStore.add_pmsUserRegistration(data)
     console.log('result ==>>', result)
 

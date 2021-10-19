@@ -47,6 +47,7 @@ const GuestInformation = (props: any) => {
   useEffect(() => {
     async function getThemeData() {
       const _initData: any = await AsyncStorage.getItem('initTheme')
+      console.log('JSON.parse(_initData)', JSON.parse(_initData))
       setThemeOrgData(JSON.parse(_initData))
     }
     getThemeData()
@@ -214,12 +215,12 @@ const GuestInformation = (props: any) => {
       birthday: '', // 用户生日
       confirmationId: '', // 登录代码
       country: selectedLanguage, // 用户国家
-      createBy: '', // 创建人
-      createTime: '', // 创建时间
+      createBy: themeOrgData.createBy, // 创建人
+      createTime: themeOrgData.fromDate, // 创建时间
       firstName: '', // 用户姓
       fromCity: '', // 上一个到访的城市
       fromurl: '', // 登录网址
-      houseResourcesId: '', // 房源ID
+      houseResourcesId: themeOrgData.houseResourceId, // 房源ID
       houseRoomTypeId: '', // 房型ID
       identityType: '', // 身份类型
       isCheckLocation: '', // 是否定位成功

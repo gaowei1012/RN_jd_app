@@ -2,15 +2,15 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View, Text, TouchableOpacity, TextInput, ScrollView, Image, ImageBackground } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as ImagePicker from 'react-native-image-picker'
 import NavigatorUtils from '../../navigation/navigation'
 import ComHeader from '../../components/ComHeader'
 import { styles } from '../../styles/guestinformation'
 import Accordion from 'react-native-collapsible/Accordion'
 import { Picker } from '@react-native-picker/picker'
 import { useStore } from '../../hooks/useStore'
-import country from '../../utils/country'
 import profession from '../../utils/profession'
-import * as ImagePicker from 'react-native-image-picker'
+import country from '../../utils/country'
 import * as Progress from 'react-native-progress'
 import { height, px2dp } from '../../utils/px2dp'
 import I18n from '../../languages'
@@ -224,13 +224,11 @@ const GuestInformation = (props: any) => {
   return (
     <SafeAreaView style={{ height: height, backgroundColor: '#fff', paddingBottom: px2dp(10) }}>
       <ComHeader {...props} setLocale={setLocale} />
-      <View>
-        <View style={[styles.orderTitle, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorMain}` : '' }]}>
-          <View style={styles.orderLeftNum}>
-            <Text style={styles.orderLeftNumText}>4</Text>
-          </View>
-          <Text style={styles.orderLeftText}>{I18n.t('guest_information')}</Text>
+      <View style={[styles.orderTitle, { backgroundColor: themeOrgData ? `${themeOrgData.themeColorMain}` : '' }]}>
+        <View style={styles.orderLeftNum}>
+          <Text style={styles.orderLeftNumText}>4</Text>
         </View>
+        <Text style={styles.orderLeftText}>{I18n.t('guest_information')}</Text>
       </View>
       <ScrollView>
         <View style={styles.guestinformationContianer}>

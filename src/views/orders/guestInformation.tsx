@@ -138,7 +138,7 @@ const GuestInformation = (props: any) => {
           </View>
           <View>
             <View style={styles.professionWrapper}>
-              <Text style={styles.profession}></Text>
+              <Text style={styles.profession}>{I18n.t('profession')}</Text>
             </View>
             <Picker selectedValue={professionVal}
               onValueChange={(itemValue, itemIndex) => {
@@ -204,12 +204,37 @@ const GuestInformation = (props: any) => {
   const handleSubmit = async () => {
     const data = {
       name: username,
-      roomId: orderOrgData.roomId,
-      orderId: orderOrgData.id,
-      contactAddress: address,
+      roomId: orderOrgData.roomId, // 房间ID
+      orderId: orderOrgData.id, // 订单ID
+      contactAddress: address, // 联系地址
       userCardPhoto1: idCard,
       userCardPhoto2: idPhoto,
-      userOccupation: professionVal,
+      userOccupation: professionVal, // 用户职业
+      agentName: '', // 供应商名称
+      birthday: '', // 用户生日
+      confirmationId: '', // 登录代码
+      country: selectedLanguage, // 用户国家
+      createBy: '', // 创建人
+      createTime: '', // 创建时间
+      firstName: '', // 用户姓
+      fromCity: '', // 上一个到访的城市
+      fromurl: '', // 登录网址
+      houseResourcesId: '', // 房源ID
+      houseRoomTypeId: '', // 房型ID
+      identityType: '', // 身份类型
+      isCheckLocation: '', // 是否定位成功
+      lastName: '', // 用户名
+      phone: '', // 手机号
+      reason: '', // 用户存在问题
+      registrationTime: '', // 登记时间
+      roomNo: '', // 房间号
+      sex: '', // 性别
+      sysOrgCode: '', // 所属部门
+      toCity: '', // 下一个到访城市
+      updateBy: '', // 更新人
+      updateTime: '', // 更新日期
+      userCardid: '', // 身份证号码
+      zip: '', // 邮编
     }
     console.log('data ==>>', data)
     // console.log(orderOrgData)

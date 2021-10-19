@@ -47,8 +47,7 @@ const GuestInformation = (props: any) => {
   useEffect(() => {
     async function getThemeData() {
       const _initData: any = await AsyncStorage.getItem('initTheme')
-      const _data: any = JSON.parse(_initData)
-      setThemeOrgData(_data)
+      setThemeOrgData(JSON.parse(_initData))
     }
     getThemeData()
   }, [])
@@ -58,6 +57,7 @@ const GuestInformation = (props: any) => {
       const result: any = await AsyncStorage.getItem('orderData')
       const _data = JSON.parse(result)
       const _arr: any = []
+      // _.pull(JSON.parse(result), 'customerName')
       _arr.push(_data.customerName)
       setOrderOrgData(JSON.parse(result))
       setSections(_arr)
@@ -97,7 +97,7 @@ const GuestInformation = (props: any) => {
   }
 
   const handle_synchronize = () => {
-    // setProgress(0.3)
+    // setProgress(0.64)
   }
 
   // 渲染内容
